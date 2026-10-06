@@ -1,0 +1,9 @@
+{
+  "sites": {
+    "eds-site": {
+      "previewOrg": "maheshuniv",
+      "previewSite": "eds-site",
+      "contentHostUrl": "https://content.da.live/maheshuniv/eds-site/"
+    }
+  }
+}
