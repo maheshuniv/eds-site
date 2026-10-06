@@ -101,6 +101,15 @@ main p {
   font-size: var(--text-lg);
 }
 
+main .default-content-wrapper ul {
+  padding-left: var(--space-lg);
+  list-style: disc;
+}
+
+main .default-content-wrapper li {
+  margin-bottom: var(--space-xs);
+}
+
 code,
 pre {
   font-size: var(--text-sm);
@@ -136,6 +145,24 @@ a:any-link {
 
 a:hover {
   color: var(--link-hover-color);
+}
+
+/* inline links in running text (source "text-button") */
+main p a:any-link:not(.button) {
+  display: inline-flex;
+  color: inherit;
+  font-family: var(--heading-font-family);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  transition: opacity var(--transition-fast);
+}
+
+main p a:any-link:not(.button):hover {
+  opacity: 0.65;
 }
 
 /* buttons */
@@ -374,6 +401,10 @@ main .section.dark a.button.secondary:focus-visible {
 
 main .section.narrow > div {
   max-width: var(--container-narrow);
+}
+
+main .section.spaced-heading .default-content-wrapper > :is(h1, h2, h3):first-child {
+  margin-bottom: var(--space-xl);
 }
 
 main .section.centered {

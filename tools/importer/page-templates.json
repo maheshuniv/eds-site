@@ -6,11 +6,11 @@
     {
       "name": "adventures",
       "urls": [
-        "https://wknd-adventures.com/adventures.html"
+        "https://wknd-adventures.com/adventures.html",
+        "https://wknd-adventures.com/expeditions.html"
       ],
       "representativeUrl": "https://wknd-adventures.com/adventures.html",
-      "description": "Adventures landing page: full-bleed hero, featured article, activity tabs with article tiles, recent reports grid, skill-level index and promo tiles, dark CTA band",
-      "urlPattern": "/*",
+      "description": "To be named in naming step",
       "blocks": [
         {
           "name": "hero-adventure",
@@ -157,7 +157,8 @@
             ".button-group a"
           ]
         }
-      ]
+      ],
+      "urlPattern": "/*"
     }
   ]
 }

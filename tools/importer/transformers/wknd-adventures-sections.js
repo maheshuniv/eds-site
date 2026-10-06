@@ -3,58 +3,69 @@
 
 /**
  * Transformer: WKND Adventures section breaks + Section Metadata.
- * Uses payload.template.sections (selectors from page-templates.json, verified in cleaned.html).
+ * Every top-level <section> of #main-content becomes an EDS section; its style is derived
+ * from the source classes, so it works for any section order on any page of the site:
+ *   .accent-section -> accent, .secondary-section -> secondary, .inverse-section -> dark,
+ *   .container--narrow -> narrow, .utility-text-align-center container -> centered
  * Breaks are inserted in beforeTransform (before parsers replace section elements);
  * Section Metadata is inserted in afterTransform, anchored to marker <hr> elements.
  */
-const SECTION_MARKER_ATTR = 'data-excat-section-id';
+const SECTION_STYLE_ATTR = 'data-excat-section-style';
 
-function querySection(root, selectors) {
-  const list = Array.isArray(selectors) ? selectors : [selectors];
-  for (const sel of list) {
-    if (!sel) continue;
-    const el = root.querySelector(sel);
-    if (el) return el;
+const SECTION_CLASS_STYLES = [
+  ['accent-section', 'accent'],
+  ['secondary-section', 'secondary'],
+  ['inverse-section', 'dark'],
+];
+
+const CONTAINER_CLASS_STYLES = [
+  ['container--narrow', 'narrow'],
+  ['utility-text-align-center', 'centered'],
+];
+
+function sectionStyle(section) {
+  const styles = SECTION_CLASS_STYLES
+    .filter(([cls]) => section.classList.contains(cls))
+    .map(([, style]) => style);
+  const container = section.querySelector(':scope > .container');
+  if (container) {
+    CONTAINER_CLASS_STYLES
+      .filter(([cls]) => container.classList.contains(cls))
+      .forEach(([, style]) => styles.push(style));
+    // a .section-heading followed by running text keeps its larger gap below the heading
+    const heading = container.querySelector(':scope > .section-heading');
+    const next = heading && heading.nextElementSibling;
+    if (next && ['P', 'UL', 'OL'].includes(next.tagName)) styles.push('spaced-heading');
   }
-  return null;
+  return styles.join(', ');
 }
 
+// eslint-disable-next-line no-unused-vars
 export default function transform(hookName, element, payload) {
-  const sections = (payload && payload.template && payload.template.sections) || [];
-  if (sections.length < 2) return;
-
   if (hookName === 'beforeTransform') {
-    for (let i = sections.length - 1; i >= 0; i -= 1) {
-      const section = sections[i];
-      if (i === 0 && !section.style) continue;
-      const sectionEl = querySection(element, section.selector);
-      if (!sectionEl) continue;
-
+    const sections = [...element.querySelectorAll('#main-content > section, main > section')]
+      .filter((s, i, all) => all.indexOf(s) === i);
+    if (sections.length < 2) return;
+    sections.forEach((section, i) => {
+      const style = sectionStyle(section);
+      if (i === 0 && !style) return;
       const hr = document.createElement('hr');
-      if (section.style) hr.setAttribute(SECTION_MARKER_ATTR, section.id);
-      sectionEl.before(hr);
-    }
+      if (style) hr.setAttribute(SECTION_STYLE_ATTR, style);
+      if (i === 0) hr.setAttribute('data-excat-first-section', '');
+      section.before(hr);
+    });
   }
 
   if (hookName === 'afterTransform') {
-    for (let i = sections.length - 1; i >= 0; i -= 1) {
-      const section = sections[i];
-      if (!section.style) continue;
-
-      const marker = element.querySelector(`[${SECTION_MARKER_ATTR}="${section.id}"]`);
-      const anchor = marker || querySection(element, section.selector);
-      if (!anchor) continue;
-
+    element.querySelectorAll(`[${SECTION_STYLE_ATTR}]`).forEach((marker) => {
+      const style = marker.getAttribute(SECTION_STYLE_ATTR);
       const metadataBlock = WebImporter.Blocks.createBlock(document, {
         name: 'Section Metadata',
-        cells: { style: section.style },
+        cells: { style },
       });
-      anchor.after(metadataBlock);
-
-      if (marker) {
-        marker.removeAttribute(SECTION_MARKER_ATTR);
-        if (i === 0) marker.remove();
-      }
-    }
+      marker.after(metadataBlock);
+      marker.removeAttribute(SECTION_STYLE_ATTR);
+      if (marker.hasAttribute('data-excat-first-section')) marker.remove();
+    });
   }
 }
