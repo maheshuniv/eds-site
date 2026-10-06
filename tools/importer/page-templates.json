@@ -1,0 +1,163 @@
+{
+  "metadata": {
+    "projectType": "da"
+  },
+  "templates": [
+    {
+      "name": "adventures",
+      "urls": [
+        "https://wknd-adventures.com/adventures.html"
+      ],
+      "representativeUrl": "https://wknd-adventures.com/adventures.html",
+      "description": "Adventures landing page: full-bleed hero, featured article, activity tabs with article tiles, recent reports grid, skill-level index and promo tiles, dark CTA band",
+      "urlPattern": "/*",
+      "blocks": [
+        {
+          "name": "hero-adventure",
+          "instances": [
+            "main section.hero-section"
+          ]
+        },
+        {
+          "name": "columns-feature",
+          "instances": [
+            ".featured-article"
+          ]
+        },
+        {
+          "name": "tabs-activity",
+          "instances": [
+            ".tab-container"
+          ]
+        },
+        {
+          "name": "cards-article",
+          "instances": [
+            "main section.section > .container > .grid-layout.desktop-3-column"
+          ]
+        },
+        {
+          "name": "cards-index",
+          "instances": [
+            ".editorial-index"
+          ]
+        },
+        {
+          "name": "cards-promo",
+          "instances": [
+            ".grid-layout--2col"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "1",
+          "name": "hero",
+          "selector": [
+            "main section.hero-section"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-adventure"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "2",
+          "name": "intro-band",
+          "selector": [
+            "main section.accent-section"
+          ],
+          "style": "accent, narrow",
+          "blocks": [],
+          "defaultContent": [
+            "main section.accent-section h2",
+            "main section.accent-section p"
+          ]
+        },
+        {
+          "id": "3",
+          "name": "featured-article",
+          "selector": [
+            "main section.secondary-section:has(.featured-article)"
+          ],
+          "style": "secondary",
+          "blocks": [
+            "columns-feature"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "4",
+          "name": "browse-by-activity",
+          "selector": [
+            "main section.section:has(.tab-container)"
+          ],
+          "style": null,
+          "blocks": [
+            "tabs-activity"
+          ],
+          "defaultContent": [
+            ".section-heading h2"
+          ]
+        },
+        {
+          "id": "5",
+          "name": "choosing-your-adventure",
+          "selector": [
+            "main section.secondary-section:not(:has(.featured-article)):not(:has(.section-heading))"
+          ],
+          "style": "secondary, narrow",
+          "blocks": [],
+          "defaultContent": [
+            "h2",
+            "p"
+          ]
+        },
+        {
+          "id": "6",
+          "name": "recent-reports",
+          "selector": [
+            "main section.section:not(.secondary-section):has(> .container > .grid-layout.desktop-3-column)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-article"
+          ],
+          "defaultContent": [
+            ".section-heading h2"
+          ]
+        },
+        {
+          "id": "7",
+          "name": "skill-level",
+          "selector": [
+            "main section.secondary-section:has(.editorial-index)"
+          ],
+          "style": "secondary, narrow",
+          "blocks": [
+            "cards-index",
+            "cards-promo"
+          ],
+          "defaultContent": [
+            ".section-heading h2"
+          ]
+        },
+        {
+          "id": "8",
+          "name": "gear-cta",
+          "selector": [
+            "main section.inverse-section"
+          ],
+          "style": "dark, centered",
+          "blocks": [],
+          "defaultContent": [
+            "h2",
+            "p",
+            ".button-group a"
+          ]
+        }
+      ]
+    }
+  ]
+}

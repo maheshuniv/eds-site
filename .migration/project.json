@@ -1,9 +1,11 @@
 {
+  "type": "da",
   "sites": {
     "eds-site": {
       "previewOrg": "maheshuniv",
       "previewSite": "eds-site",
-      "contentHostUrl": "https://content.da.live/maheshuniv/eds-site/"
+      "contentHostUrl": "https://content.da.live/maheshuniv/eds-site/",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
     }
   }
 }

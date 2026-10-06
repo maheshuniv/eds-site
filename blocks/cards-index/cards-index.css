@@ -1,0 +1,71 @@
+/* cards-index: numbered editorial index (large amber number + heading/paragraph) */
+
+/* source spaces the following container 64px margin + 64px padding below the index */
+.cards-index-wrapper:not(:last-child) {
+  margin-bottom: calc(2 * var(--space-3xl));
+}
+
+.cards-index > ol {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* each item: number column + content column, separated by amber rules */
+.cards-index .cards-index-item {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+  padding: var(--space-xl) 0;
+  border-top: 1px solid var(--color-amber);
+}
+
+.cards-index .cards-index-item:last-child {
+  border-bottom: 1px solid var(--color-amber);
+}
+
+.cards-index .cards-index-number {
+  color: var(--color-amber);
+  font-family: var(--heading-font-family);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.cards-index .cards-index-content {
+  min-width: 0;
+}
+
+.cards-index .cards-index-item.cards-index-item-no-number .cards-index-content {
+  grid-column: 1 / -1;
+}
+
+.cards-index .cards-index-content > :first-child {
+  margin-top: 0;
+}
+
+.cards-index .cards-index-content h3 {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-tight);
+}
+
+.cards-index .cards-index-content p {
+  margin: 0 0 var(--space-md);
+  color: var(--color-gray-500);
+}
+
+@media (width >= 769px) {
+  .cards-index .cards-index-item {
+    grid-template-columns: 5rem 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .cards-index .cards-index-number {
+    font-size: 3.5rem;
+  }
+}

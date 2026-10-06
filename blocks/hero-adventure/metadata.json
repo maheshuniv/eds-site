@@ -1,0 +1,20 @@
+{
+  "variantName": "hero-adventure",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "purpose": "page-hero",
+    "imagePattern": "background",
+    "structure": "bg image + tag + h1 + lead"
+  },
+  "contentPattern": "1 column: row 1 = block name; row 2 = background image; row 3 = tag paragraph, H1, lead paragraph",
+  "usage": {
+    "pagesUsing": ["https://wknd-adventures.com/adventures.html"],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-06"
+  },
+  "options": [],
+  "memberVariantIds": ["hero-adventure"]
+}

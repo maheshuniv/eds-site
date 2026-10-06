@@ -1,0 +1,20 @@
+{
+  "variantName": "columns-feature",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "featured-article",
+    "imagePattern": "large-left",
+    "structure": "image + tag + h2 + paragraph + cta"
+  },
+  "contentPattern": "row 1 = block name; row 2 = cell 1 image | cell 2 tag paragraph, H2, paragraph, link (button)",
+  "usage": {
+    "pagesUsing": ["https://wknd-adventures.com/adventures.html"],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-06"
+  },
+  "options": [],
+  "memberVariantIds": ["columns-feature"]
+}

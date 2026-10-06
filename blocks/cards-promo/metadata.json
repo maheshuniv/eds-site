@@ -1,0 +1,20 @@
+{
+  "variantName": "cards-promo",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "purpose": "promo-tiles",
+    "imagePattern": "noimg",
+    "structure": "tag + heading + paragraph + ghost cta"
+  },
+  "contentPattern": "1 column: row 1 = block name; each following row = text cell (tag/number paragraph, heading, paragraph, optional CTA link)",
+  "usage": {
+    "pagesUsing": ["https://wknd-adventures.com/adventures.html"],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-06"
+  },
+  "options": [],
+  "memberVariantIds": ["cards-promo"]
+}
