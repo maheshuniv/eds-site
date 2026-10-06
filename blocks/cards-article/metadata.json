@@ -1,0 +1,20 @@
+{
+  "variantName": "cards-article",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "article-teasers",
+    "imagePattern": "top-image",
+    "structure": "image + tag + heading + description"
+  },
+  "contentPattern": "2 columns: row 1 = block name; each following row = image | tag paragraph, linked heading, description",
+  "usage": {
+    "pagesUsing": ["https://wknd-adventures.com/adventures.html"],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-06"
+  },
+  "options": [],
+  "memberVariantIds": ["cards-article"]
+}

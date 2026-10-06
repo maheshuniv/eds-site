@@ -1,0 +1,20 @@
+{
+  "variantName": "tabs-activity",
+  "baseBlock": "tabs",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "activity-browser",
+    "imagePattern": "card-images",
+    "structure": "tab labels + 3-col image card grid per panel"
+  },
+  "contentPattern": "2 columns: row 1 = block name; each following row = tab label | tab content (repeating groups: image, tag paragraph, linked h3, description paragraph)",
+  "usage": {
+    "pagesUsing": ["https://wknd-adventures.com/adventures.html"],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-06"
+  },
+  "options": [],
+  "memberVariantIds": ["tabs-activity"]
+}
