@@ -309,7 +309,185 @@ var CustomImportScript = (() => {
       });
       if (content.length) cells.push([content]);
     });
-    const block = WebImporter.Blocks.createBlock(document2, { name: "cards-promo", cells });
+    const compact = items.some((item) => item.querySelector(".h4-heading"));
+    const name = compact ? "cards-promo (compact)" : "cards-promo";
+    const block = WebImporter.Blocks.createBlock(document2, { name, cells });
+    element.replaceWith(block);
+  }
+
+  // tools/importer/parsers/accordion-faq.js
+  function parse7(element, { document: document2 }) {
+    let items = [...element.querySelectorAll(":scope > .faq-item")];
+    if (!items.length) items = [...element.querySelectorAll(":scope > div, :scope > details")];
+    const cells = [];
+    items.forEach((item) => {
+      const question = item.querySelector(".faq-question, summary, button, h3, h4");
+      const answer = item.querySelector(".faq-answer") || [...item.children].find((c) => c !== question);
+      const title = question ? question.textContent.replace(/\s+/g, " ").trim() : "";
+      if (!title) return;
+      const content = [];
+      if (answer) {
+        const hasBlockChildren = [...answer.children].some((c) => /^(P|UL|OL|DIV|H\d)$/.test(c.tagName));
+        if (hasBlockChildren) {
+          content.push(...answer.childNodes);
+        } else if (answer.textContent.trim()) {
+          const p = document2.createElement("p");
+          p.append(...answer.childNodes);
+          content.push(p);
+        }
+      }
+      cells.push([title, content]);
+    });
+    if (!cells.length) {
+      element.replaceWith(...element.childNodes);
+      return;
+    }
+    const block = WebImporter.Blocks.createBlock(document2, { name: "accordion-faq", cells });
+    element.replaceWith(block);
+  }
+
+  // tools/importer/parsers/ticker.js
+  function parse8(element, { document: document2 }) {
+    const track = element.querySelector(".ticker-track") || element;
+    const seps = [...track.querySelectorAll(".ticker-sep")].map((s) => s.textContent.trim()).filter(Boolean);
+    const sep = seps[0] || "\xB7";
+    const words = track.textContent.split(sep).map((w) => w.replace(/\s+/g, " ").trim()).filter(Boolean);
+    let unique = words;
+    for (let len = 1; len <= words.length / 2; len += 1) {
+      if (words.length % len === 0 && words.every((w, i) => w === words[i % len])) {
+        unique = words.slice(0, len);
+        break;
+      }
+    }
+    if (!unique.length) {
+      element.remove();
+      return;
+    }
+    const p = document2.createElement("p");
+    p.textContent = unique.join(" \xB7 ");
+    const block = WebImporter.Blocks.createBlock(document2, { name: "ticker", cells: [[p]] });
+    element.replaceWith(block);
+  }
+
+  // tools/importer/parsers/gallery-adventure.js
+  function parse9(element, { document: document2 }) {
+    let gridImages = [...element.querySelectorAll(":scope > img")];
+    if (!gridImages.length) gridImages = [...element.querySelectorAll("img")];
+    const wideRows = [];
+    const next = element.nextElementSibling;
+    if (next && next.matches(".utility-margin-top-lg") && next.querySelector("img") && !next.textContent.trim()) {
+      const wideImages = [...next.querySelectorAll("img")];
+      wideRows.push(wideImages);
+      next.remove();
+    }
+    if (!gridImages.length && !wideRows.length) {
+      element.replaceWith(...element.childNodes);
+      return;
+    }
+    const rows = [];
+    if (gridImages.length) rows.push(gridImages);
+    rows.push(...wideRows);
+    const width = Math.max(...rows.map((r) => r.length));
+    const cells = rows.map((r) => {
+      const row = [...r];
+      while (row.length < width) row.push("");
+      return row;
+    });
+    const block = WebImporter.Blocks.createBlock(document2, { name: "gallery-adventure", cells });
+    element.replaceWith(block);
+  }
+
+  // tools/importer/parsers/columns-story.js
+  function parse10(element, { document: document2 }) {
+    const children = [...element.children];
+    let image = element.querySelector(":scope > img.gallery-img--wide, :scope > img");
+    if (!image) {
+      const imgWrap = children.find((c) => c.querySelector("img") && !c.textContent.trim());
+      image = imgWrap ? imgWrap.querySelector("img") : element.querySelector("img.gallery-img--wide");
+    }
+    const textCol = children.find((c) => c !== image && c.textContent.trim()) || element;
+    const textCell = [];
+    const heading = textCol.querySelector(".section-heading h2, .section-heading h3, h2, h3");
+    if (heading) textCell.push(heading);
+    [...textCol.querySelectorAll("p")].forEach((p) => {
+      if (p.textContent.trim() && !(heading && heading.contains(p))) textCell.push(p);
+    });
+    [...textCol.querySelectorAll("a")].forEach((a) => {
+      if (!textCell.some((n) => n.contains(a))) textCell.push(a);
+    });
+    if (!textCell.length && !image) {
+      element.replaceWith(...element.childNodes);
+      return;
+    }
+    const cells = [[textCell.length ? textCell : "", image || ""]];
+    const block = WebImporter.Blocks.createBlock(document2, { name: "columns-story", cells });
+    element.replaceWith(block);
+  }
+
+  // tools/importer/parsers/tabs-team.js
+  function collectPanes(element) {
+    let panes = [...element.querySelectorAll('.tab-pane, [role="tabpanel"]')];
+    if (panes.length) return panes;
+    panes = [];
+    let sib = element.nextElementSibling;
+    while (sib && sib.matches('.tab-pane, [role="tabpanel"]')) {
+      panes.push(sib);
+      sib = sib.nextElementSibling;
+    }
+    return panes;
+  }
+  function labelFromPane(pane) {
+    if (!pane.id) return "";
+    const text = pane.id.replace(/^tab-/, "").replace(/-/g, " ").trim();
+    return text ? text.charAt(0).toUpperCase() + text.slice(1) : "";
+  }
+  function buildProfile(pane, document2) {
+    const content = [];
+    const photo = pane.querySelector(".profile-circle img, .team-profile-col img, img");
+    if (photo) content.push(photo);
+    const nameEl = pane.querySelector(".profile-name, .team-profile-col h3, .team-profile-col h4, .team-profile-col h5");
+    if (nameEl) {
+      const name = document2.createElement("p");
+      name.textContent = nameEl.textContent.trim();
+      content.push(name);
+      let roleEl = nameEl.nextElementSibling;
+      while (roleEl) {
+        if (roleEl.textContent.trim() && !roleEl.querySelector("img")) {
+          const role = document2.createElement("p");
+          role.textContent = roleEl.textContent.trim();
+          content.push(role);
+        }
+        roleEl = roleEl.nextElementSibling;
+      }
+    }
+    let bio = pane.querySelector(".team-profile-bio");
+    let bioParas = bio ? [...bio.querySelectorAll("p, h3, h4, ul, ol")] : [];
+    if (!bioParas.length) {
+      bioParas = [...pane.querySelectorAll("p")].filter((p) => !p.closest(".team-profile-col") && p !== nameEl);
+    }
+    bioParas.forEach((p) => {
+      if (p.textContent.trim() && !content.some((n) => n.contains(p))) content.push(p);
+    });
+    return content;
+  }
+  function parse11(element, { document: document2 }) {
+    const labels = [...element.querySelectorAll('button, .tab-menu-link, [role="tab"]')].filter((el, i, arr) => !arr.some((o) => o !== el && o.contains(el)));
+    const panes = collectPanes(element);
+    if (!panes.length) {
+      element.replaceWith(...element.childNodes);
+      return;
+    }
+    const cells = [];
+    panes.forEach((pane, i) => {
+      var _a;
+      const label = ((_a = labels[i]) == null ? void 0 : _a.textContent.trim()) || labelFromPane(pane) || `Tab ${i + 1}`;
+      const profile = buildProfile(pane, document2);
+      cells.push([label, profile.length ? profile : ""]);
+    });
+    panes.forEach((pane) => {
+      if (!element.contains(pane)) pane.remove();
+    });
+    const block = WebImporter.Blocks.createBlock(document2, { name: "tabs-team", cells });
     element.replaceWith(block);
   }
 
@@ -338,6 +516,24 @@ var CustomImportScript = (() => {
   function transform(hookName, element, payload) {
     if (hookName === TransformHook.beforeTransform) {
       resolveRelativeUrls(element, payload.params && payload.params.originalURL || payload.url);
+      element.querySelectorAll("#main-content figure").forEach((figure) => {
+        const img = figure.querySelector("img");
+        if (!img) return;
+        const doc = figure.ownerDocument;
+        const imgP = doc.createElement("p");
+        imgP.append(img);
+        const parts = [imgP];
+        const caption = figure.querySelector("figcaption");
+        const text = caption ? caption.textContent.replace(/\s+/g, " ").trim() : "";
+        if (text) {
+          const capP = doc.createElement("p");
+          const em = doc.createElement("em");
+          em.textContent = text;
+          capP.append(em);
+          parts.push(capP);
+        }
+        figure.replaceWith(...parts);
+      });
       WebImporter.DOMUtils.remove(element, [
         "a.skip-link",
         "div.navbar",
@@ -346,11 +542,32 @@ var CustomImportScript = (() => {
         "script",
         "noscript"
       ]);
-      element.querySelectorAll(".button-group a.button, .button-group a.button--ghost").forEach((a) => {
+      element.querySelectorAll(".button-group a").forEach((a) => {
+        const labels = [...a.querySelectorAll(":scope > .button-label")];
+        if (labels.length < 2) return;
+        let after = a;
+        labels.slice(1).forEach((label) => {
+          const extra = a.ownerDocument.createElement("a");
+          extra.setAttribute("href", a.getAttribute("href"));
+          extra.className = "button--ghost";
+          extra.append(label);
+          after.after(extra);
+          after = extra;
+        });
+      });
+      element.querySelectorAll(".button-group a.button, .button-group a.button--ghost, .button-group a.accent-button").forEach((a) => {
         const label = a.querySelector(".button-label");
         if (label) a.textContent = label.textContent.trim();
-        const wrap = document.createElement(a.classList.contains("button--ghost") ? "em" : "strong");
-        a.replaceWith(wrap);
+        const p = document.createElement("p");
+        a.replaceWith(p);
+        let inner = p;
+        if (a.classList.contains("accent-button")) {
+          const strong = document.createElement("strong");
+          p.append(strong);
+          inner = strong;
+        }
+        const wrap = document.createElement(a.classList.contains("button--ghost") ? "em" : inner === p ? "strong" : "em");
+        inner.append(wrap);
         wrap.append(a);
       });
     }
@@ -391,13 +608,15 @@ var CustomImportScript = (() => {
       CONTAINER_CLASS_STYLES.filter(([cls]) => container.classList.contains(cls)).forEach(([, style]) => styles.push(style));
       const heading = container.querySelector(":scope > .section-heading");
       const next = heading && heading.nextElementSibling;
-      if (next && ["P", "UL", "OL"].includes(next.tagName)) styles.push("spaced-heading");
+      if (next && ["P", "UL", "OL", "H3", "H4"].includes(next.tagName)) styles.push("spaced-heading");
+      const first = container.firstElementChild;
+      if (first && first.matches("p.tag")) styles.push("eyebrow");
     }
     return styles.join(", ");
   }
   function transform2(hookName, element, payload) {
     if (hookName === "beforeTransform") {
-      const sections = [...element.querySelectorAll("#main-content > section, main > section")].filter((s, i, all) => all.indexOf(s) === i);
+      const sections = [...element.querySelectorAll("#main-content > section, main > section, #main-content > .ticker-strip")].filter((s, i, all) => all.indexOf(s) === i);
       if (sections.length < 2) return;
       sections.forEach((section, i) => {
         const style = sectionStyle(section);
@@ -429,7 +648,12 @@ var CustomImportScript = (() => {
     "tabs-activity": parse3,
     "cards-article": parse4,
     "cards-index": parse5,
-    "cards-promo": parse6
+    "cards-promo": parse6,
+    "accordion-faq": parse7,
+    "ticker": parse8,
+    "gallery-adventure": parse9,
+    "columns-story": parse10,
+    "tabs-team": parse11
   };
   var PAGE_TEMPLATE = {
     "name": "adventures",
@@ -459,7 +683,7 @@ var CustomImportScript = (() => {
       {
         "name": "cards-article",
         "instances": [
-          "main section.section > .container > .grid-layout.desktop-3-column"
+          "main section.section > .container > .grid-layout.desktop-3-column:has(.article-card)"
         ]
       },
       {
@@ -471,7 +695,38 @@ var CustomImportScript = (() => {
       {
         "name": "cards-promo",
         "instances": [
-          ".grid-layout--2col"
+          ".grid-layout--2col",
+          "main section.section > .container > .grid-layout.desktop-3-column:has(> .card)"
+        ]
+      },
+      {
+        "name": "accordion-faq",
+        "instances": [
+          ".faq-list"
+        ]
+      },
+      {
+        "name": "ticker",
+        "instances": [
+          ".ticker-strip"
+        ]
+      },
+      {
+        "name": "gallery-adventure",
+        "instances": [
+          ".grid-layout.grid-images"
+        ]
+      },
+      {
+        "name": "columns-story",
+        "instances": [
+          ".grid-layout.tablet-1-column"
+        ]
+      },
+      {
+        "name": "tabs-team",
+        "instances": [
+          "#main-content > section > .container > .tab-menu"
         ]
       }
     ],

@@ -1,0 +1,58 @@
+/* ticker: full-width scrolling word strip between amber hairlines */
+.ticker {
+  overflow: hidden;
+  padding-block: var(--space-md);
+  border-top: 1px solid var(--color-amber);
+  border-bottom: 1px solid var(--color-amber);
+}
+
+.ticker .ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 40s linear infinite;
+}
+
+.ticker .ticker-list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  margin: 0;
+  padding: 0 var(--space-xl) 0 0;
+  list-style: none;
+  font-family: var(--heading-font-family);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ticker .ticker-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+/* amber dot between words (and between the two loops) */
+.ticker .ticker-list li::after {
+  content: '·';
+  flex-shrink: 0;
+  color: var(--color-amber);
+  font-size: var(--text-2xl);
+  line-height: 1;
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker {
+    overflow-x: auto;
+  }
+
+  .ticker .ticker-track {
+    animation: none;
+  }
+}

@@ -46,6 +46,26 @@ export default function transform(hookName, element, payload) {
   if (hookName === TransformHook.beforeTransform) {
     resolveRelativeUrls(element, (payload.params && payload.params.originalURL) || payload.url);
 
+    // figure > img + figcaption (default content): image paragraph + caption as an emphasised-only paragraph
+    element.querySelectorAll('#main-content figure').forEach((figure) => {
+      const img = figure.querySelector('img');
+      if (!img) return;
+      const doc = figure.ownerDocument;
+      const imgP = doc.createElement('p');
+      imgP.append(img);
+      const parts = [imgP];
+      const caption = figure.querySelector('figcaption');
+      const text = caption ? caption.textContent.replace(/\s+/g, ' ').trim() : '';
+      if (text) {
+        const capP = doc.createElement('p');
+        const em = doc.createElement('em');
+        em.textContent = text;
+        capP.append(em);
+        parts.push(capP);
+      }
+      figure.replaceWith(...parts);
+    });
+
     // Global chrome removed before parsing so megamenu cards/links can never match block selectors.
     WebImporter.DOMUtils.remove(element, [
       'a.skip-link',
@@ -56,12 +76,39 @@ export default function transform(hookName, element, payload) {
       'noscript',
     ]);
 
+    // The importer merges neighbouring links that share an href into one <a> (e.g. "Community" + "Submit a
+    // Story" both -> community.html). Split such a button back into one link per label; the merged ones
+    // lose their class, so they become ghost (secondary) buttons, as on the source.
+    element.querySelectorAll('.button-group a').forEach((a) => {
+      const labels = [...a.querySelectorAll(':scope > .button-label')];
+      if (labels.length < 2) return;
+      let after = a;
+      labels.slice(1).forEach((label) => {
+        const extra = a.ownerDocument.createElement('a');
+        extra.setAttribute('href', a.getAttribute('href'));
+        extra.className = 'button--ghost';
+        extra.append(label);
+        after.after(extra);
+        after = extra;
+      });
+    });
+
     // Default-content CTAs: scripts.js decorateButtons only buttonizes bold (primary) / italic (secondary) links.
-    element.querySelectorAll('.button-group a.button, .button-group a.button--ghost').forEach((a) => {
+    // accent buttons are bold + italic (accent) in decorateButtons. Each button gets its own
+    // paragraph: decorateButtons only buttonizes a link that is alone in its paragraph.
+    element.querySelectorAll('.button-group a.button, .button-group a.button--ghost, .button-group a.accent-button').forEach((a) => {
       const label = a.querySelector('.button-label');
       if (label) a.textContent = label.textContent.trim();
-      const wrap = document.createElement(a.classList.contains('button--ghost') ? 'em' : 'strong');
-      a.replaceWith(wrap);
+      const p = document.createElement('p');
+      a.replaceWith(p);
+      let inner = p;
+      if (a.classList.contains('accent-button')) {
+        const strong = document.createElement('strong');
+        p.append(strong);
+        inner = strong;
+      }
+      const wrap = document.createElement(a.classList.contains('button--ghost') ? 'em' : (inner === p ? 'strong' : 'em'));
+      inner.append(wrap);
       wrap.append(a);
     });
   }

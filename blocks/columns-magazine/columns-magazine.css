@@ -1,0 +1,96 @@
+/*
+ * columns-magazine: featured article split (photo left, grey content panel right).
+ * Values extracted from wknd.site .cmp-teaser--featured. Typography, colors and
+ * the yellow button come from the magazine template (templates/magazine/magazine.css).
+ * Source breakpoint: stacked below 768px, side by side from 768px.
+ */
+
+/* mobile: content panel first, photo underneath */
+.columns-magazine .columns-magazine-row {
+  display: flex;
+  flex-direction: column-reverse;
+  padding-bottom: 25px;
+  color: var(--wknd-text-color);
+}
+
+.columns-magazine .columns-magazine-image {
+  display: flex;
+  flex-direction: column;
+  line-height: 0;
+}
+
+.columns-magazine .columns-magazine-image picture,
+.columns-magazine .columns-magazine-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.columns-magazine .columns-magazine-image img {
+  object-fit: cover;
+  object-position: center top;
+}
+
+.columns-magazine .columns-magazine-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: -18px;
+  padding: 63px 36px 36px;
+  background-color: var(--wknd-rule-color);
+}
+
+/* "Featured Article" pretitle */
+.columns-magazine .columns-magazine-content .columns-magazine-eyebrow {
+  margin: 0 0 13.5px;
+  font-size: 18px;
+
+  /* source computes 700 but only ships the 600 face, so 600 is what renders */
+  font-weight: 600;
+  line-height: 45px;
+  text-align: justify;
+}
+
+.columns-magazine .columns-magazine-content h2 {
+  margin: 18px 0;
+  color: var(--wknd-text-color);
+  font-family: var(--wknd-serif);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 54px;
+}
+
+/* description */
+.columns-magazine .columns-magazine-content > p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 24.5px;
+  text-align: left;
+}
+
+.columns-magazine .columns-magazine-content > p.columns-magazine-cta {
+  margin: 18px 0;
+  line-height: 0;
+}
+
+/* single cell (no image): content only */
+.columns-magazine .columns-magazine-single .columns-magazine-content {
+  margin-top: 0;
+}
+
+@media (width >= 768px) {
+  .columns-magazine .columns-magazine-row {
+    flex-direction: row;
+
+    /* source 18px bottom spacing; padding so it doesn't collapse with the next heading margin */
+    padding-bottom: 18px;
+  }
+
+  .columns-magazine .columns-magazine-image {
+    flex: 2 1 0%;
+  }
+
+  .columns-magazine .columns-magazine-content {
+    flex: 1 1 0%;
+    margin-top: 0;
+  }
+}

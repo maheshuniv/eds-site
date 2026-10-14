@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/blog/surfing-costa-rica.html",
+  "path": "blog/surfing-costa-rica",
+  "timestamp": "2026-10-07T12:25:22.896Z",
+  "title": "Pavones and Playa Negra: Costa Rica Surf Guide — WKND Adventures",
+  "template": "blog",
+  "blocks": [
+    "hero-blog",
+    "columns-aside",
+    "gallery-adventure",
+    "cards-article"
+  ]
+}

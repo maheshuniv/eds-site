@@ -69,3 +69,29 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* compact option: smaller (h4-scale) tile headings; last paragraph keeps its spacing */
+.cards-promo.compact .cards-promo-card-body h3 {
+  font-size: var(--text-2xl);
+}
+
+.cards-promo.compact .cards-promo-card-body > p:last-child {
+  margin-bottom: var(--space-md);
+}
+
+/* tiles on dark sections: translucent surface, light text */
+.section.dark .cards-promo .cards-promo-card {
+  border-color: rgb(255 255 255 / 12%);
+  background-color: rgb(255 255 255 / 6%);
+  color: var(--color-white);
+}
+
+.section.dark .cards-promo .cards-promo-card-body p:not(.cards-promo-card-tag) {
+  color: rgb(255 255 255 / 55%);
+}
+
+@media (width >= 769px) {
+  .cards-promo > ul:has(> li:nth-child(3)) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/blog/alpine-cycling.html",
+  "path": "blog/alpine-cycling",
+  "timestamp": "2026-10-07T12:24:59.953Z",
+  "title": "Six Days Through the High Alps — WKND Adventures",
+  "template": "blog",
+  "blocks": [
+    "hero-blog",
+    "columns-aside",
+    "gallery-adventure",
+    "cards-article"
+  ]
+}

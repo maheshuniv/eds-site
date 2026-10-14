@@ -11,6 +11,7 @@ import {
   loadCSS,
   buildBlock,
   readBlockConfig,
+  getMetadata,
   toCamelCase,
   toClassName,
 } from './aem.js';
@@ -192,6 +193,9 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  // page templates (metadata "Template") may ship scoped styles in /templates/<name>/<name>.css
+  const template = toClassName(getMetadata('template'));
+  if (template) await loadCSS(`${window.hlx.codeBasePath}/templates/${template}/${template}.css`);
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);

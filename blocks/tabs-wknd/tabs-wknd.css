@@ -1,0 +1,170 @@
+/* tabs-wknd: wknd.site adventure-detail tabs (.cmp-tabs holding content fragments).
+ * Uppercase 14px tab row (active tab inverted dark, no hover change) above one visible
+ * panel of justified copy, bold sub-head paragraphs, arrow-bullet lists and a full-width image. */
+
+.tabs-wknd {
+  color: var(--wknd-text-color);
+  font-family: var(--wknd-sans);
+  font-size: 18px;
+  line-height: 27px;
+}
+
+/* tab row: wraps on narrow screens (no scrolling, no gap); source tablist margin is 18px 0 */
+.tabs-wknd .tabs-wknd-list {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  margin: 18px 0;
+  padding: 0;
+}
+
+/* breakpoint-exception: from 1025px the adventure-details template already supplies the
+   18px top offset as wrapper padding, so the row starts flush with the block */
+@media (width >= 1025px) {
+  .wknd-adventure-details .tabs-wknd .tabs-wknd-list {
+    margin-top: 0;
+  }
+}
+
+.tabs-wknd .tabs-wknd-tab {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  min-width: 48px;
+  max-height: 48px;
+  margin: 0;
+  padding: 8px 16px;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  background: none;
+  color: var(--wknd-text-color);
+  font-family: var(--wknd-sans);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 21px;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.tabs-wknd .tabs-wknd-tab[aria-selected='true'] {
+  border: 0;
+  background-color: var(--wknd-text-color);
+  color: #fff;
+}
+
+/* source removes the focus outline; keep a ring for keyboard users only */
+.tabs-wknd .tabs-wknd-tab:focus {
+  outline: none;
+}
+
+.tabs-wknd .tabs-wknd-tab:focus-visible {
+  outline: 2px solid var(--wknd-text-color);
+  outline-offset: 2px;
+}
+
+/* panel: own BFC so the first/last child margins stay inside (source panel height includes them) */
+.tabs-wknd .tabs-wknd-panel {
+  display: flow-root;
+  margin: 0;
+  padding: 0;
+}
+
+.tabs-wknd .tabs-wknd-panel[hidden] {
+  display: none;
+}
+
+.tabs-wknd .tabs-wknd-panel p {
+  margin: 0 0 13.5px;
+  font-size: 18px;
+  line-height: 45px;
+  text-align: justify;
+}
+
+.tabs-wknd .tabs-wknd-panel strong,
+.tabs-wknd .tabs-wknd-panel b {
+  /* source computes 700 but only ships the 600 face of Source Sans Pro, so the bold
+     sub-heads render at 600; the template loads a real 700 face, which looks heavier */
+  font-weight: 600;
+}
+
+/* image: source renders an inline full-width image (7px vertical margins) in a 27px line box,
+   which adds a 7px baseline gap below it (583.9px box for a 562.9px image at 845px).
+   Reproduced explicitly with a block image so it does not depend on the line-box strut. */
+.tabs-wknd .tabs-wknd-panel p:has(> picture),
+.tabs-wknd .tabs-wknd-panel p:has(> img) {
+  display: flow-root;
+  margin: 0;
+  line-height: 0;
+  text-align: left;
+}
+
+.tabs-wknd .tabs-wknd-panel picture {
+  display: block;
+}
+
+.tabs-wknd .tabs-wknd-panel img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 7px 0 14px;
+}
+
+/* image caption: an emphasised-only paragraph directly after an image (source .cmp-image__title) */
+.tabs-wknd .tabs-wknd-panel p:has(> picture) + p:has(> em:only-child),
+.tabs-wknd .tabs-wknd-panel p:has(> img) + p:has(> em:only-child) {
+  margin: -3.5px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.tabs-wknd .tabs-wknd-panel p:has(> picture) + p:has(> em:only-child) em,
+.tabs-wknd .tabs-wknd-panel p:has(> img) + p:has(> em:only-child) em {
+  font-style: normal;
+}
+
+/* lists: no markers, 12px indent, 2x line-height, small right-pointing arrow bullet */
+.tabs-wknd .tabs-wknd-panel ul {
+  margin: 18px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tabs-wknd .tabs-wknd-panel ul li {
+  margin: 0;
+  padding: 0 0 0 12px;
+  line-height: 36px;
+  text-align: left;
+}
+
+/* source glyph (wknd-icon-font U+EA1C) is a ~5x7px solid triangle drawn 6px into the
+   12px indent; text starts ~11px after the indent */
+.tabs-wknd .tabs-wknd-panel ul li::before {
+  content: '';
+  display: inline-block;
+  position: relative;
+  left: -6px;
+  width: 0;
+  height: 0;
+  margin-right: 4.5px;
+  border-top: 3.5px solid transparent;
+  border-bottom: 3.5px solid transparent;
+  border-left: 5px solid currentcolor;
+  vertical-align: 4.5px;
+}
+
+.tabs-wknd .tabs-wknd-panel ol {
+  margin: 18px 0;
+  padding: 0 0 0 1.5em;
+}
+
+.tabs-wknd .tabs-wknd-panel ol li {
+  line-height: 36px;
+}

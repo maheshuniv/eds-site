@@ -8,6 +8,11 @@ import tabsActivityParser from "./parsers/tabs-activity.js";
 import cardsArticleParser from "./parsers/cards-article.js";
 import cardsIndexParser from "./parsers/cards-index.js";
 import cardsPromoParser from "./parsers/cards-promo.js";
+import accordionFaqParser from "./parsers/accordion-faq.js";
+import tickerParser from "./parsers/ticker.js";
+import galleryAdventureParser from "./parsers/gallery-adventure.js";
+import columnsStoryParser from "./parsers/columns-story.js";
+import tabsTeamParser from "./parsers/tabs-team.js";
 
 // TRANSFORMER IMPORTS
 import cleanupTransformer from "./transformers/wknd-adventures-cleanup.js";
@@ -21,6 +26,11 @@ const parsers = {
   "cards-article": cardsArticleParser,
   "cards-index": cardsIndexParser,
   "cards-promo": cardsPromoParser,
+  "accordion-faq": accordionFaqParser,
+  "ticker": tickerParser,
+  "gallery-adventure": galleryAdventureParser,
+  "columns-story": columnsStoryParser,
+  "tabs-team": tabsTeamParser,
 };
 
 // PAGE TEMPLATE CONFIGURATION - Embedded from page-templates.json
@@ -52,7 +62,7 @@ const PAGE_TEMPLATE = {
     {
       "name": "cards-article",
       "instances": [
-        "main section.section > .container > .grid-layout.desktop-3-column"
+        "main section.section > .container > .grid-layout.desktop-3-column:has(.article-card)"
       ]
     },
     {
@@ -64,7 +74,38 @@ const PAGE_TEMPLATE = {
     {
       "name": "cards-promo",
       "instances": [
-        ".grid-layout--2col"
+        ".grid-layout--2col",
+        "main section.section > .container > .grid-layout.desktop-3-column:has(> .card)"
+      ]
+    },
+    {
+      "name": "accordion-faq",
+      "instances": [
+        ".faq-list"
+      ]
+    },
+    {
+      "name": "ticker",
+      "instances": [
+        ".ticker-strip"
+      ]
+    },
+    {
+      "name": "gallery-adventure",
+      "instances": [
+        ".grid-layout.grid-images"
+      ]
+    },
+    {
+      "name": "columns-story",
+      "instances": [
+        ".grid-layout.tablet-1-column"
+      ]
+    },
+    {
+      "name": "tabs-team",
+      "instances": [
+        "#main-content > section > .container > .tab-menu"
       ]
     }
   ],

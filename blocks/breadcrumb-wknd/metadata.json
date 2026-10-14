@@ -1,0 +1,20 @@
+{
+  "variantName": "breadcrumb-wknd",
+  "baseBlock": "breadcrumb",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "purpose": "breadcrumb-trail",
+    "imagePattern": "noimg",
+    "structure": "single horizontal row: parent link(s) then current page title, triangle separators between items"
+  },
+  "contentPattern": "1 row, 1 cell: parent link(s) (paragraphs or list items) followed by the current page title as plain text (last item, not linked)",
+  "usage": {
+    "pagesUsing": ["https://wknd.site/us/en/adventures/bali-surf-camp.html", "/us/en/magazine/arctic-surfing"],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-07"
+  },
+  "options": [],
+  "memberVariantIds": ["breadcrumb-wknd"]
+}

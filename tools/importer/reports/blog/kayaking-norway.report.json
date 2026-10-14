@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/blog/kayaking-norway.html",
+  "path": "blog/kayaking-norway",
+  "timestamp": "2026-10-07T12:25:08.593Z",
+  "title": "Lofoten Islands: Arctic Surfing at the Top of the World — WKND Adventures",
+  "template": "blog",
+  "blocks": [
+    "hero-blog",
+    "columns-aside",
+    "gallery-adventure",
+    "cards-article"
+  ]
+}

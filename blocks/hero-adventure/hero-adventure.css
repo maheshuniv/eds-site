@@ -106,3 +106,42 @@
     padding-block: var(--space-3xl);
   }
 }
+
+/* buttons on the hero image: light variants; stacked on mobile, in a row on desktop */
+.hero-adventure p.button-wrapper + p.button-wrapper {
+  margin-top: var(--space-md);
+}
+
+.hero-adventure a.button.primary {
+  border-color: var(--color-white);
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.hero-adventure a.button.primary:hover,
+.hero-adventure a.button.primary:focus-visible {
+  color: var(--color-black);
+}
+
+.hero-adventure a.button.secondary {
+  --button-shadow-color: var(--color-black);
+
+  border-color: rgb(255 255 255 / 50%);
+  color: var(--color-white);
+}
+
+.hero-adventure a.button.secondary:hover,
+.hero-adventure a.button.secondary:focus-visible {
+  border-color: var(--color-amber);
+  background-color: var(--color-amber);
+  color: var(--color-black);
+}
+
+@media (width >= 769px) {
+  .hero-adventure p.button-wrapper,
+  .hero-adventure p.button-wrapper + p.button-wrapper {
+    display: inline-flex;
+    margin: 0 var(--space-md) 0 0;
+    vertical-align: top;
+  }
+}

@@ -1,0 +1,84 @@
+/*
+ * quote-wknd: wknd.site pull quote (source .text.cmp-text--quote).
+ * Grey panel (14px gutter + 18px inner padding), 36px/54px serif quotation with 14px padding,
+ * an 80px yellow rule sitting 9px under the last line, then an 18px/45px sans attribution
+ * (the source wraps it in <u>, but its CSS removes the underline).
+ * The values are the same at every breakpoint on the source.
+ * Hooks: --quote-wknd-panel-padding, --quote-wknd-panel-background, --quote-wknd-inner-padding,
+ * --quote-wknd-rule-width, --quote-wknd-rule-thickness, --quote-wknd-rule-color.
+ */
+
+.quote-wknd {
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--quote-wknd-panel-padding, 18px 32px);
+  background: var(--quote-wknd-panel-background, var(--wknd-rule-color, #ebebeb));
+  color: var(--wknd-text-color, #202020);
+}
+
+.quote-wknd blockquote {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+/* quotation: source blockquote (14px padding, 36px/54px serif, left aligned) */
+.quote-wknd .quote-wknd-quotation {
+  padding: var(--quote-wknd-inner-padding, 14px) var(--quote-wknd-inner-padding, 14px) 0;
+  font-family: var(--wknd-serif, asar, georgia, 'Times New Roman', times, serif);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 54px;
+}
+
+.quote-wknd .quote-wknd-quotation > * {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  text-align: left;
+}
+
+.quote-wknd .quote-wknd-quotation > * + * {
+  margin-top: 0.5em;
+}
+
+.quote-wknd .quote-wknd-quotation strong,
+.quote-wknd .quote-wknd-quotation b {
+  font-weight: 700;
+}
+
+/* short yellow rule under the quote (source blockquote::after: 80px, 2px, nudged 9px down).
+   The bottom margin is the blockquote's 14px bottom padding + 18px bottom margin. */
+.quote-wknd .quote-wknd-rule {
+  display: block;
+  position: relative;
+  top: 9px;
+  width: var(--quote-wknd-rule-width, 80px);
+  height: 0;
+  margin: 0 var(--quote-wknd-inner-padding, 14px) calc(var(--quote-wknd-inner-padding, 14px) + 18px);
+  border-top: var(--quote-wknd-rule-thickness, 2px) solid var(--quote-wknd-rule-color, var(--wknd-brand-primary, #ffea00));
+}
+
+/* attribution: source paragraph of underlined 18px sans copy (reset the global page-footer styles) */
+.quote-wknd .quote-wknd-attribution {
+  display: block;
+  margin: 0;
+  padding: 0;
+  background: none;
+  font-family: var(--wknd-sans, 'Source Sans Pro', 'Helvetica Neue', helvetica, arial, sans-serif);
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.quote-wknd .quote-wknd-attribution > * {
+  margin: 0 0 13.5px;
+  font-size: 18px;
+  line-height: 45px;
+  text-align: justify;
+}
+
+.quote-wknd .quote-wknd-attribution cite {
+  font-style: italic;
+}

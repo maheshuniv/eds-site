@@ -1,0 +1,75 @@
+/*
+ * Breadcrumb (WKND) - wknd.site cmp-breadcrumb--fixed
+ * Inline-block trail: uppercase 14px (12px below 768px) items with 10px vertical
+ * padding, a yellow triangle separator and a semibold parent link.
+ */
+.breadcrumb-wknd {
+  color: var(--wknd-text-color, #202020);
+  font-family: var(--wknd-sans, 'Source Sans Pro', 'Helvetica Neue', helvetica, arial, sans-serif);
+  font-size: 18px;
+  line-height: 1.5;
+  padding-top: 7px;
+}
+
+/* top-aligned so the offset does not depend on the line strut (quirks vs standards mode) */
+.breadcrumb-wknd nav {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.breadcrumb-wknd .breadcrumb-wknd-list {
+  margin: 0;
+  padding: 0 12px 0 0;
+  font-size: 12px;
+  list-style: none;
+}
+
+.breadcrumb-wknd .breadcrumb-wknd-item {
+  display: inline-block;
+  padding: 10px 5px;
+  text-transform: uppercase;
+  vertical-align: top;
+}
+
+.breadcrumb-wknd .breadcrumb-wknd-item:first-child {
+  padding-left: 0;
+}
+
+/* the source items are separated by a collapsed whitespace (one space) */
+.breadcrumb-wknd .breadcrumb-wknd-item + .breadcrumb-wknd-item {
+  margin-left: 0.2em;
+}
+
+/* separator: yellow right-pointing triangle (source wknd-icon-font glyph U+EA1C, 1em advance) */
+.breadcrumb-wknd .breadcrumb-wknd-item + .breadcrumb-wknd-item::before {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 0.75em;
+  margin-right: calc(5px + 0.2em);
+  background-color: var(--wknd-brand-primary, #ffea00);
+  clip-path: polygon(19.6% 0, 80.4% 50%, 19.6% 100%);
+  vertical-align: 0.07em;
+}
+
+.breadcrumb-wknd a:any-link,
+.breadcrumb-wknd a:hover {
+  color: var(--wknd-text-color, #202020);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.breadcrumb-wknd [aria-current='page'] {
+  font-weight: 400;
+}
+
+/* breakpoint-exception: the source list switches from 12px to 14px at 768px */
+@media (width >= 768px) {
+  .breadcrumb-wknd {
+    padding-top: 5px;
+  }
+
+  .breadcrumb-wknd .breadcrumb-wknd-list {
+    font-size: 14px;
+  }
+}

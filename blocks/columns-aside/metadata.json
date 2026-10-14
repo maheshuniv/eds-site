@@ -1,0 +1,24 @@
+{
+  "variantName": "columns-aside",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "inherits-section",
+    "density": "medium",
+    "purpose": "article-aside",
+    "imagePattern": "none",
+    "structure": "1 row, 2 cells: ~1/3 detail cell (h3 + bulleted list) | ~2/3 pull quote (italic quote, amber left rule, attribution); vertically centred; stacked on mobile"
+  },
+  "contentPattern": "1 row, 2 cells: cell 1 = H3 + bulleted list; cell 2 = quote paragraph(s) (or a blockquote) + attribution paragraph starting with a dash ('— Jordan M. & Morgan L.')",
+  "usage": {
+    "pagesUsing": [
+      "https://wknd-adventures.com/blog/patagonia-trek.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-07"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "columns-aside"
+  ]
+}

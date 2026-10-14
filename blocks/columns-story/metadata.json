@@ -1,0 +1,24 @@
+{
+  "variantName": "columns-story",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "story-intro",
+    "imagePattern": "large-right",
+    "structure": "h2 + paragraph + image"
+  },
+  "contentPattern": "row 1 = block name; row 2 = cell 1 H2 + paragraph(s) | cell 2 image. Equal columns with a 32px gap on desktop (text left, image right); stacks text first at <=768px. Image 20px radius, cover, about 360px tall.",
+  "usage": {
+    "pagesUsing": [
+      "https://wknd-adventures.com/about.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-07"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "columns-story"
+  ]
+}

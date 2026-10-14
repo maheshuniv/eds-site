@@ -1,0 +1,112 @@
+/*
+ * cards-magazine-secure: gated (members-only) teaser tiles.
+ * Values measured from wknd.site/us/en/magazine.html (.teaser.cmp-teaser--secure).
+ * Each tile is one AEM grid column: 1/1 on phone, 1/2 on tablet, 1/3 on desktop,
+ * left-aligned; a yellow corner flag with a lock overlays the top-left of the tile.
+ */
+
+.cards-magazine-secure > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 28px;
+}
+
+.cards-magazine-secure .cards-magazine-secure-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-top: 29px;
+}
+
+/* lock flag: 48px yellow triangle in the top-left corner, black lock glyph */
+.cards-magazine-secure .cards-magazine-secure-locked::before {
+  content: '';
+  position: absolute;
+  top: 36px;
+  left: 0;
+  z-index: 2;
+  width: 48px;
+  height: 48px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 11V7.9a4.5 4.5 0 0 1 9 0V11' fill='none' stroke='%23000' stroke-width='3.4'/%3E%3Crect y='11' width='15' height='13.3' rx='1.5' fill='%23000'/%3E%3C/svg%3E") no-repeat 12px 12px / 24px 24px,
+    linear-gradient(to left top, rgb(255 255 255 / 0%) 50%, var(--wknd-brand-primary) 50%);
+  pointer-events: none;
+}
+
+/* the gated content renders faded; the flag stays fully opaque */
+.cards-magazine-secure .cards-magazine-secure-card-body,
+.cards-magazine-secure .cards-magazine-secure-card-image {
+  opacity: 0.65;
+}
+
+.cards-magazine-secure .cards-magazine-secure-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cards-magazine-secure .cards-magazine-secure-card-title {
+  margin: 9px 0;
+  color: var(--wknd-text-color);
+  font-family: var(--wknd-sans);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+  text-transform: uppercase;
+}
+
+.cards-magazine-secure .cards-magazine-secure-card-description {
+  margin: 0 0 13.5px;
+  color: var(--wknd-muted-color);
+  font-size: 14px;
+  line-height: 24.5px;
+  text-transform: uppercase;
+}
+
+/* "Read More": a disabled-looking status label, not a link */
+.cards-magazine-secure .cards-magazine-secure-card-label {
+  margin: 14px 0;
+  padding: 7px 14px;
+  background-color: var(--wknd-rule-color);
+  color: var(--wknd-muted-color);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: default;
+  pointer-events: none;
+  user-select: none;
+}
+
+.cards-magazine-secure .cards-magazine-secure-card-image {
+  padding: 7px 0 14px;
+  line-height: 0;
+}
+
+.cards-magazine-secure .cards-magazine-secure-card-image picture,
+.cards-magazine-secure .cards-magazine-secure-card-image img {
+  display: block;
+  width: 100%;
+}
+
+.cards-magazine-secure .cards-magazine-secure-card-image img {
+  height: 200px;
+  object-fit: cover;
+}
+
+@media (width >= 768px) {
+  .cards-magazine-secure > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 1025px) {
+  .cards-magazine-secure > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

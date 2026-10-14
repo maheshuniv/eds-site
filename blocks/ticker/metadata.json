@@ -1,0 +1,25 @@
+{
+  "variantName": "ticker",
+  "baseBlock": "ticker",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "purpose": "decorative-marquee",
+    "imagePattern": "noimg",
+    "structure": "single scrolling row of words with amber separators"
+  },
+  "contentPattern": "1 column: row 1 = block name; row 2 = words separated by a middle dot (or a list)",
+  "usage": {
+    "pagesUsing": [
+      "https://wknd-adventures.com/basecamp.html",
+      "https://wknd-adventures.com/"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-07"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "ticker"
+  ]
+}

@@ -1,0 +1,96 @@
+/* one row: detail cell (h3 + list) beside a pull quote; stacked on mobile */
+.columns-aside .columns-aside-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.columns-aside .columns-aside-row + .columns-aside-row {
+  margin-top: var(--space-2xl);
+}
+
+.columns-aside .columns-aside-row > div {
+  min-width: 0;
+}
+
+/* detail cell */
+.columns-aside .columns-aside-detail h3 {
+  margin-bottom: var(--space-sm);
+}
+
+.columns-aside .columns-aside-detail p {
+  font-size: var(--text-base);
+}
+
+.columns-aside .columns-aside-detail ul,
+.columns-aside .columns-aside-detail ol {
+  margin: 0;
+  padding-left: var(--space-lg);
+}
+
+.columns-aside .columns-aside-detail ul {
+  list-style: disc;
+}
+
+.columns-aside .columns-aside-detail li {
+  margin-bottom: var(--space-xs);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+
+/* pull quote: amber rule, italic body, small-caps-style attribution under the same rule */
+.columns-aside .columns-aside-quote blockquote {
+  margin: 0;
+  border-left: 4px solid var(--accent-color);
+  padding-left: var(--space-lg);
+  color: var(--color-gray-700);
+  font-size: var(--text-xl);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.columns-aside .columns-aside-quote-body {
+  margin: 0 0 var(--space-md);
+  color: var(--text-color);
+  font-size: var(--text-xl);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.columns-aside .columns-aside-quote-body:last-child {
+  margin-bottom: 0;
+}
+
+.columns-aside .columns-aside-attribution {
+  margin: 0;
+  font-size: var(--text-xl);
+  line-height: 1.5;
+}
+
+/* the source cite is inline on 30px quote lines (baseline-aligned, ~4px below centre); a block
+   with 30px lines keeps that footprint per wrapped line whether or not the page renders in quirks mode */
+.columns-aside .columns-aside-attribution cite {
+  display: block;
+  position: relative;
+  top: 4px;
+  color: var(--accent-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--text-xs);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0.1em;
+}
+
+@media (width >= 769px) {
+  /* 3-column grid: detail takes one column, the quote spans two */
+  .columns-aside .columns-aside-row.columns-aside-2-cols,
+  .columns-aside .columns-aside-row.columns-aside-3-cols {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .columns-aside .columns-aside-row.columns-aside-2-cols > div:last-child {
+    grid-column: span 2;
+  }
+}

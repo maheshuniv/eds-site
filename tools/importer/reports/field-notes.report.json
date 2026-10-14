@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/field-notes.html",
+  "path": "field-notes",
+  "timestamp": "2026-10-07T11:58:43.072Z",
+  "title": "Field Notes — WKND Adventures",
+  "template": "adventures",
+  "blocks": [
+    "hero-adventure",
+    "columns-feature",
+    "cards-article"
+  ]
+}

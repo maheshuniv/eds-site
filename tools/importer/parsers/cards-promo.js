@@ -45,6 +45,9 @@ export default function parse(element, { document }) {
     if (content.length) cells.push([content]);
   });
 
-  const block = WebImporter.Blocks.createBlock(document, { name: 'cards-promo', cells });
+  // tiles whose headings use the source's smaller h4 scale get the "compact" option
+  const compact = items.some((item) => item.querySelector('.h4-heading'));
+  const name = compact ? 'cards-promo (compact)' : 'cards-promo';
+  const block = WebImporter.Blocks.createBlock(document, { name, cells });
   element.replaceWith(block);
 }

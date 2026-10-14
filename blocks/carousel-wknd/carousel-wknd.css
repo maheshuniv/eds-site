@@ -1,0 +1,145 @@
+/*
+ * Carousel (WKND) - source: wknd.site `.carousel.cmp-carousel--mini`
+ * Full-bleed 400px cover image (7px top / 14px bottom inline-image spacing),
+ * then a 27px controls row: 10px dots centred in the space left of the arrows,
+ * icon-only prev/next arrows at the right. Same layout at every viewport.
+ */
+
+/* full-viewport-width carousel (same pattern as hero-wknd) */
+.carousel-wknd-container .carousel-wknd-wrapper {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.carousel-wknd {
+  position: relative;
+  width: 100%;
+}
+
+.carousel-wknd .carousel-wknd-slides,
+.carousel-wknd .carousel-wknd-indicators {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* instant swap: only the active slide is displayed, no transition */
+.carousel-wknd .carousel-wknd-slide {
+  display: none;
+  position: relative;
+  margin: 0;
+}
+
+.carousel-wknd .carousel-wknd-slide.is-active {
+  display: block;
+}
+
+/* source: img margin 7px 0 inside an inline line box -> item is 421px tall */
+.carousel-wknd .carousel-wknd-slide-image {
+  padding: 7px 0 14px;
+}
+
+.carousel-wknd .carousel-wknd-slide-image picture {
+  display: block;
+  width: 100%;
+}
+
+.carousel-wknd .carousel-wknd-slide-image img {
+  display: block;
+  width: 100%;
+  height: 400px;
+  min-height: 400px;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.carousel-wknd .carousel-wknd-slide-caption {
+  padding: 0 0 14px;
+}
+
+.carousel-wknd .carousel-wknd-slide-caption p {
+  margin: 0;
+}
+
+/* controls row below the image: dots centred, arrows at the right */
+.carousel-wknd .carousel-wknd-controls {
+  display: flex;
+  align-items: flex-start;
+  height: 27px;
+}
+
+.carousel-wknd .carousel-wknd-indicators {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 9px;
+}
+
+.carousel-wknd .carousel-wknd-indicator {
+  flex: 0 1 auto;
+  margin: 0 7px;
+}
+
+.carousel-wknd .carousel-wknd-indicator button {
+  display: block;
+  width: 10px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgb(175 175 175);
+  cursor: pointer;
+}
+
+.carousel-wknd .carousel-wknd-indicator button[aria-current='true'] {
+  background-color: rgb(0 0 0 / 80%);
+}
+
+.carousel-wknd .carousel-wknd-nav {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 3.6px;
+}
+
+.carousel-wknd .carousel-wknd-nav button {
+  display: block;
+  box-sizing: border-box;
+  width: 26px;
+  height: 24px;
+  margin: 0 13.333px 0 0;
+  padding: 1px 0 1px 6px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: rgb(0 0 0);
+  cursor: pointer;
+  appearance: none;
+}
+
+/* icon-only arrows (source: wknd-icon-font e90f / e90e, 20px glyphs) */
+.carousel-wknd .carousel-wknd-nav button::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: currentcolor;
+  mask: var(--carousel-wknd-arrow) center / 20px 20px no-repeat;
+}
+
+.carousel-wknd .carousel-wknd-prev {
+  --carousel-wknd-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M200 100H14M107 6 13 100l94 94' fill='none' stroke='%23000' stroke-width='18'/%3E%3C/svg%3E");
+}
+
+.carousel-wknd .carousel-wknd-next {
+  --carousel-wknd-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M0 100H186M93 6l94 94-94 94' fill='none' stroke='%23000' stroke-width='18'/%3E%3C/svg%3E");
+}
+
+/* source has no hover change; keyboard focus keeps the browser-style ring */
+.carousel-wknd .carousel-wknd-nav button:focus-visible,
+.carousel-wknd .carousel-wknd-indicator button:focus-visible {
+  outline: 1px auto rgb(16 16 16);
+  outline-offset: 0;
+}

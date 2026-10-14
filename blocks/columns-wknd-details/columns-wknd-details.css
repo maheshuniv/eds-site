@@ -1,0 +1,77 @@
+/*
+ * Columns (WKND details) - adventure details list (Activity, Adventure Type, ...).
+ * Values from wknd.site .cmp-contentfragment--elements.
+ * Stacked (< 1025px): the details flow inline, wrapping, full width; with the "narrow" option
+ * (source layout 7/12 phone, 9/12 tablet) the list spans that part of the container.
+ * From 1025px: one detail per row with a grey left rule.
+ */
+.columns-wknd-details {
+  /* keep the list's 18px margins inside the block (the source component is a float) */
+  display: flow-root;
+}
+
+/* narrow option: source grid columns 7/12 on phones, measured on the container including its gutters */
+.columns-wknd-details.narrow {
+  width: calc((100% + 2 * var(--wknd-gutter, 14px)) * 7 / 12 - 2 * var(--wknd-gutter, 14px));
+}
+
+.columns-wknd-details .columns-wknd-details-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin: 18px 0;
+  padding: 0;
+}
+
+.columns-wknd-details .columns-wknd-details-item {
+  flex: none;
+  box-sizing: content-box;
+  height: 84px;
+  margin: 0 0 22.5px;
+  padding: 0 36px 0 0;
+  font-family: var(--wknd-sans);
+  text-transform: uppercase;
+}
+
+.columns-wknd-details .columns-wknd-details-label {
+  margin: 0;
+  padding: 12px 0 0;
+  color: var(--wknd-muted-color);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.columns-wknd-details .columns-wknd-details-value {
+  margin: 0;
+  padding: 7px 0 0;
+  color: var(--wknd-text-color);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+}
+
+@media (width >= 768px) {
+  .columns-wknd-details.narrow {
+    width: calc((100% + 2 * var(--wknd-gutter, 14px)) * 9 / 12 - 2 * var(--wknd-gutter, 14px));
+  }
+}
+
+/* breakpoint-exception: the source grid switches to two columns above 1024px */
+@media (width >= 1025px) {
+  .columns-wknd-details.narrow {
+    width: auto;
+  }
+
+  /* BFC: the last item's 22.5px bottom margin must not collapse into the list margin (source floats) */
+  .columns-wknd-details .columns-wknd-details-list {
+    display: flow-root;
+  }
+
+  /* source keeps width: 100% on a content-box item, so the rule + padding sit outside the text width */
+  .columns-wknd-details .columns-wknd-details-item {
+    width: 100%;
+    padding: 0 18px;
+    border-left: 5px solid var(--wknd-rule-color);
+  }
+}

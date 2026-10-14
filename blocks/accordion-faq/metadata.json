@@ -1,0 +1,25 @@
+{
+  "variantName": "accordion-faq",
+  "baseBlock": "accordion",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "faq",
+    "imagePattern": "noimg",
+    "structure": "rounded question cards with +/x toggle; multiple open"
+  },
+  "contentPattern": "2 columns: row 1 = block name; each following row = question | answer",
+  "usage": {
+    "pagesUsing": [
+      "https://wknd-adventures.com/basecamp.html",
+      "https://wknd-adventures.com/"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-07"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "accordion-faq"
+  ]
+}

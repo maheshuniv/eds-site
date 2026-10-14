@@ -1,0 +1,87 @@
+/* accordion-faq: rounded question cards; answers slide open, several can be open at once */
+.accordion-faq .accordion-faq-item {
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+}
+
+.accordion-faq .accordion-faq-item:hover {
+  border-color: var(--color-amber);
+}
+
+.accordion-faq .accordion-faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  padding: var(--space-md) var(--space-lg);
+  border: 0;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: normal;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.accordion-faq .accordion-faq-question:hover {
+  background-color: var(--color-gray-100);
+}
+
+/* "+" rotates into an "x" when open */
+.accordion-faq .accordion-faq-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-amber);
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.accordion-faq .accordion-faq-icon::before {
+  content: '+';
+}
+
+.accordion-faq .is-open .accordion-faq-icon {
+  transform: rotate(45deg);
+}
+
+.accordion-faq .accordion-faq-answer {
+  overflow: hidden;
+  max-height: 0;
+  padding: 0 var(--space-lg);
+  color: var(--color-gray-700);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+}
+
+.accordion-faq .is-open .accordion-faq-answer {
+  max-height: 30rem;
+  padding: var(--space-md) var(--space-lg);
+}
+
+.accordion-faq .accordion-faq-answer p {
+  margin: 0;
+  font-size: inherit;
+}
+
+.accordion-faq .accordion-faq-answer p + p {
+  margin-top: var(--space-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion-faq .accordion-faq-answer,
+  .accordion-faq .accordion-faq-icon {
+    transition: none;
+  }
+}

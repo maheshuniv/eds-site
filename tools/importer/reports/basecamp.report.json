@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/basecamp.html",
+  "path": "basecamp",
+  "timestamp": "2026-10-07T11:58:19.400Z",
+  "title": "Basecamp — WKND Adventures",
+  "template": "adventures",
+  "blocks": [
+    "hero-adventure",
+    "tabs-activity",
+    "accordion-faq",
+    "ticker"
+  ]
+}

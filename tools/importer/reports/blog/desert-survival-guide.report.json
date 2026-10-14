@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/blog/desert-survival-guide.html",
+  "path": "blog/desert-survival-guide",
+  "timestamp": "2026-10-07T12:25:04.479Z",
+  "title": "48 Hours in the Sonoran: A Field Guide — WKND Adventures",
+  "template": "blog",
+  "blocks": [
+    "hero-blog",
+    "columns-aside",
+    "gallery-adventure",
+    "cards-article"
+  ]
+}
