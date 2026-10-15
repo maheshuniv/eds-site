@@ -539,3 +539,44 @@ body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) 
     grid-row: 1 / span 20;
   }
 }
+
+/* wknd.site header (block header-wknd, a fixed bar): body > header reserves its space, so the page content
+   starts where the source content starts (source .root padding-top: 130px, 200px from 1025px) */
+body.wknd-site header {
+  height: 130px;
+}
+
+body.wknd-site header .header-wknd {
+  visibility: hidden;
+}
+
+body.wknd-site header .header-wknd[data-block-status="loaded"] {
+  visibility: visible;
+}
+
+/* the open mobile drawer pushes the page 275px right (source navPanel-visible); relative offsets keep the
+   fixed header bar on the viewport. The "pushed" class stays on while the page slides back. */
+body.wknd-site {
+  left: 0;
+}
+
+body.wknd-site.header-wknd-nav-pushed {
+  position: relative;
+  overflow-x: hidden;
+  transition: left 0.5s ease;
+}
+
+body.wknd-site.header-wknd-nav-pushed.header-wknd-nav-open {
+  left: 275px;
+}
+
+/* breakpoint-exception: the source desktop header starts at 1025px */
+@media (width >= 1025px) {
+  body.wknd-site header {
+    height: 200px;
+  }
+
+  body.wknd-site.header-wknd-nav-pushed.header-wknd-nav-open {
+    left: 0;
+  }
+}

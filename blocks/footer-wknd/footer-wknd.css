@@ -1,0 +1,235 @@
+/* wknd.site footer: dark band, logo + page links + social buttons, then the credits.
+   Mobile-first: below 1025px the logo (4/12) and the stacked links (8/12) share a row,
+   "Follow Us" and the buttons stack below them, left aligned. */
+.footer-wknd {
+  --footer-wknd-bg: #202020;
+  --footer-wknd-text: #ebebeb;
+  --footer-wknd-text-light: #f7f7f7;
+  --footer-wknd-button-bg: #ebebeb;
+  --footer-wknd-gutter: 14px;
+  --footer-wknd-sans: 'Source Sans Pro', 'Helvetica Neue', helvetica, arial, sans-serif;
+
+  margin-top: 48px;
+  padding: 16px 0 24px;
+  background-color: var(--footer-wknd-bg);
+  color: var(--footer-wknd-text);
+  font-family: var(--footer-wknd-sans);
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.footer-wknd .footer-wknd-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  align-items: start;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0 var(--footer-wknd-gutter);
+}
+
+.footer-wknd .footer-wknd-inner > * {
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 0 var(--footer-wknd-gutter);
+}
+
+.footer-wknd ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-wknd a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-wknd a:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 2px;
+}
+
+/* logo: max 128px wide, 7px above and below, plus the source line box descent */
+.footer-wknd .footer-wknd-brand {
+  padding-bottom: 7px;
+}
+
+.footer-wknd .footer-wknd-logo {
+  display: block;
+  max-width: 128px;
+}
+
+.footer-wknd .footer-wknd-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 7px 0;
+}
+
+/* page links: 14px uppercase, 48px tall hit area overflowing a 27px row */
+.footer-wknd .footer-wknd-nav {
+  padding-top: 10px;
+}
+
+.footer-wknd .footer-wknd-nav li {
+  display: flex;
+  align-items: flex-start;
+  height: 27px;
+  margin-bottom: 16px;
+}
+
+.footer-wknd .footer-wknd-nav a:any-link {
+  display: block;
+  margin-top: -9px;
+  padding: 15px 17px;
+  color: var(--footer-wknd-text);
+  font-size: 14px;
+  line-height: 18px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.footer-wknd .footer-wknd-nav a:hover,
+.footer-wknd .footer-wknd-nav a:focus {
+  text-decoration: underline;
+}
+
+.footer-wknd .footer-wknd-nav a[aria-current='page'] {
+  color: var(--footer-wknd-text-light);
+  text-decoration: underline;
+}
+
+/* "Follow Us" */
+.footer-wknd .footer-wknd-follow {
+  grid-column: 1 / -1;
+}
+
+.footer-wknd .footer-wknd-follow-title {
+  margin: 21.28px 0;
+  color: var(--footer-wknd-text);
+  font-family: var(--footer-wknd-sans);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+
+/* social buttons: 48px light squares with a dark 17.5px glyph at 14px / 18px */
+.footer-wknd .footer-wknd-social-wrapper {
+  grid-column: 1 / -1;
+}
+
+.footer-wknd .footer-wknd-social {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer-wknd .footer-wknd-social-link:any-link {
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  min-width: 48px;
+  height: 48px;
+  background-color: var(--footer-wknd-button-bg);
+  color: var(--footer-wknd-bg);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 48px;
+  text-transform: uppercase;
+}
+
+/* links without a known icon keep their text */
+.footer-wknd .footer-wknd-social-link:not(.footer-wknd-social-icon) {
+  padding: 0 14px;
+}
+
+.footer-wknd .footer-wknd-social-icon .footer-wknd-social-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.footer-wknd .footer-wknd-icon {
+  display: block;
+  position: absolute;
+  top: 18px;
+  left: 14px;
+  height: 17.5px;
+  background-color: currentcolor;
+  mask: var(--footer-wknd-icon) center / 100% 100% no-repeat;
+}
+
+/* glyph advance widths of the source icon font at 17.5px */
+.footer-wknd .footer-wknd-icon-facebook {
+  --footer-wknd-icon: url('icons/facebook.svg');
+
+  width: 8.75px;
+}
+
+.footer-wknd .footer-wknd-icon-twitter {
+  --footer-wknd-icon: url('icons/twitter.svg');
+
+  width: 21.875px;
+}
+
+.footer-wknd .footer-wknd-icon-instagram {
+  --footer-wknd-icon: url('icons/instagram.svg');
+
+  width: 17.5px;
+}
+
+/* credits: 12px / 15px justified copy, underlined links, 36px below the top row */
+.footer-wknd .footer-wknd-legal {
+  grid-column: 1 / -1;
+  margin-top: 36px;
+  color: var(--footer-wknd-text-light);
+}
+
+.footer-wknd .footer-wknd-legal p {
+  margin: 0 0 13.5px;
+  color: var(--footer-wknd-text-light);
+  font-size: 12px;
+  line-height: 15px;
+  text-align: justify;
+}
+
+.footer-wknd .footer-wknd-legal a:any-link {
+  color: var(--footer-wknd-text-light);
+  text-decoration: underline;
+}
+
+/* breakpoint-exception: the source footer grid switches to one row above 1024px */
+@media (width >= 1025px) {
+  /* fixed 1164px container; logo 2/12, links 6/12, "Follow Us" 2/12 (right aligned), buttons 2/12 */
+  .footer-wknd .footer-wknd-inner {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 6fr) minmax(0, 2fr) minmax(0, 2fr);
+    max-width: calc(1164px + 2 * var(--footer-wknd-gutter));
+  }
+
+  .footer-wknd .footer-wknd-nav {
+    padding-top: 15px;
+  }
+
+  .footer-wknd .footer-wknd-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .footer-wknd .footer-wknd-nav li {
+    margin-bottom: 0;
+  }
+
+  .footer-wknd .footer-wknd-follow {
+    grid-column: auto;
+    text-align: right;
+  }
+
+  .footer-wknd .footer-wknd-inner > .footer-wknd-social-wrapper {
+    grid-column: auto;
+    padding: 0;
+  }
+}

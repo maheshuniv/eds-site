@@ -10,6 +10,8 @@ import {
   loadSections,
   loadCSS,
   buildBlock,
+  decorateBlock,
+  loadBlock,
   readBlockConfig,
   getMetadata,
   toCamelCase,
@@ -214,11 +216,30 @@ async function loadEager(doc) {
 }
 
 /**
+ * Loads a site-specific header/footer block (e.g. header-wknd) into the header/footer element.
+ * @param {Element} container body > header or body > footer
+ * @param {string} name block name
+ * @returns {Promise}
+ */
+function loadChromeBlock(container, name) {
+  const block = buildBlock(name, '');
+  container.append(block);
+  decorateBlock(block);
+  return loadBlock(block);
+}
+
+// wknd.site pages (template wknd-site) have their own header and footer
+// (fragments /us/en/nav and /us/en/footer)
+const isWkndSite = () => document.body.classList.contains('wknd-site');
+
+/**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
 async function loadLazy(doc) {
-  loadHeader(doc.querySelector('body > header'));
+  const header = doc.querySelector('body > header');
+  if (isWkndSite()) loadChromeBlock(header, 'header-wknd');
+  else loadHeader(header);
 
   const main = doc.querySelector('main');
   await loadSections(main);
@@ -227,7 +248,9 @@ async function loadLazy(doc) {
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  loadFooter(doc.querySelector('body > footer'));
+  const footer = doc.querySelector('body > footer');
+  if (isWkndSite()) loadChromeBlock(footer, 'footer-wknd');
+  else loadFooter(footer);
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
