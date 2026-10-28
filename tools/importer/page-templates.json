@@ -1,0 +1,249 @@
+{
+  "metadata": {
+    "projectType": "da"
+  },
+  "templates": [
+    {
+      "name": "adventures",
+      "urls": [
+        "https://wknd-adventures.com/adventures.html",
+        "https://wknd-adventures.com/basecamp.html",
+        "https://wknd-adventures.com/destinations.html",
+        "https://wknd-adventures.com/expeditions.html",
+        "https://wknd-adventures.com/field-notes.html",
+        "https://wknd-adventures.com/",
+        "https://wknd-adventures.com/about.html",
+        "https://wknd-adventures.com/community.html",
+        "https://wknd-adventures.com/faq.html",
+        "https://wknd-adventures.com/gear.html",
+        "https://wknd-adventures.com/sustainability.html"
+      ],
+      "representativeUrl": "https://wknd-adventures.com/adventures.html",
+      "description": "To be named in naming step",
+      "blocks": [
+        {
+          "name": "hero-adventure",
+          "instances": [
+            "main section.hero-section"
+          ]
+        },
+        {
+          "name": "columns-feature",
+          "instances": [
+            ".featured-article"
+          ]
+        },
+        {
+          "name": "tabs-activity",
+          "instances": [
+            ".tab-container"
+          ]
+        },
+        {
+          "name": "cards-article",
+          "instances": [
+            "main section.section > .container > .grid-layout.desktop-3-column:has(.article-card)"
+          ]
+        },
+        {
+          "name": "cards-index",
+          "instances": [
+            ".editorial-index"
+          ]
+        },
+        {
+          "name": "cards-promo",
+          "instances": [
+            ".grid-layout--2col",
+            "main section.section > .container > .grid-layout.desktop-3-column:has(> .card)"
+          ]
+        },
+        {
+          "name": "accordion-faq",
+          "instances": [
+            ".faq-list"
+          ]
+        },
+        {
+          "name": "ticker",
+          "instances": [
+            ".ticker-strip"
+          ]
+        },
+        {
+          "name": "gallery-adventure",
+          "instances": [
+            ".grid-layout.grid-images"
+          ]
+        },
+        {
+          "name": "columns-story",
+          "instances": [
+            ".grid-layout.tablet-1-column"
+          ]
+        },
+        {
+          "name": "tabs-team",
+          "instances": [
+            "#main-content > section > .container > .tab-menu"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "1",
+          "name": "hero",
+          "selector": [
+            "main section.hero-section"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-adventure"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "2",
+          "name": "intro-band",
+          "selector": [
+            "main section.accent-section"
+          ],
+          "style": "accent, narrow",
+          "blocks": [],
+          "defaultContent": [
+            "main section.accent-section h2",
+            "main section.accent-section p"
+          ]
+        },
+        {
+          "id": "3",
+          "name": "featured-article",
+          "selector": [
+            "main section.secondary-section:has(.featured-article)"
+          ],
+          "style": "secondary",
+          "blocks": [
+            "columns-feature"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "4",
+          "name": "browse-by-activity",
+          "selector": [
+            "main section.section:has(.tab-container)"
+          ],
+          "style": null,
+          "blocks": [
+            "tabs-activity"
+          ],
+          "defaultContent": [
+            ".section-heading h2"
+          ]
+        },
+        {
+          "id": "5",
+          "name": "choosing-your-adventure",
+          "selector": [
+            "main section.secondary-section:not(:has(.featured-article)):not(:has(.section-heading))"
+          ],
+          "style": "secondary, narrow",
+          "blocks": [],
+          "defaultContent": [
+            "h2",
+            "p"
+          ]
+        },
+        {
+          "id": "6",
+          "name": "recent-reports",
+          "selector": [
+            "main section.section:not(.secondary-section):has(> .container > .grid-layout.desktop-3-column)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-article"
+          ],
+          "defaultContent": [
+            ".section-heading h2"
+          ]
+        },
+        {
+          "id": "7",
+          "name": "skill-level",
+          "selector": [
+            "main section.secondary-section:has(.editorial-index)"
+          ],
+          "style": "secondary, narrow",
+          "blocks": [
+            "cards-index",
+            "cards-promo"
+          ],
+          "defaultContent": [
+            ".section-heading h2"
+          ]
+        },
+        {
+          "id": "8",
+          "name": "gear-cta",
+          "selector": [
+            "main section.inverse-section"
+          ],
+          "style": "dark, centered",
+          "blocks": [],
+          "defaultContent": [
+            "h2",
+            "p",
+            ".button-group a"
+          ]
+        }
+      ],
+      "urlPattern": "/*"
+    },
+    {
+      "name": "blog",
+      "urls": [
+        "https://wknd-adventures.com/blog/alpine-cycling.html",
+        "https://wknd-adventures.com/blog/desert-survival-guide.html",
+        "https://wknd-adventures.com/blog/kayaking-norway.html",
+        "https://wknd-adventures.com/blog/mountain-photography.html",
+        "https://wknd-adventures.com/blog/patagonia-trek.html",
+        "https://wknd-adventures.com/blog/surfing-costa-rica.html",
+        "https://wknd-adventures.com/blog/ultralight-backpacking.html",
+        "https://wknd-adventures.com/blog/wild-swimming-guide.html",
+        "https://wknd-adventures.com/blog/winter-mountaineering.html",
+        "https://wknd-adventures.com/blog/yosemite-rock-climbing.html"
+      ],
+      "representativeUrl": "https://wknd-adventures.com/blog/patagonia-trek.html",
+      "description": "WKND Adventures blog post (all /blog/*.html): blog hero with byline, article body (narrow, article), aside (packing list + pull quote), In the Field gallery, More Stories cards",
+      "blocks": [
+        {
+          "name": "hero-blog",
+          "instances": [
+            "main section.hero-section:not(.hero-section--full)"
+          ]
+        },
+        {
+          "name": "columns-aside",
+          "instances": [
+            "main section.secondary-section > .container > .grid-layout.desktop-3-column:has(> .span-2):has(.pull-quote)"
+          ]
+        },
+        {
+          "name": "gallery-adventure",
+          "instances": [
+            ".grid-layout.grid-images"
+          ]
+        },
+        {
+          "name": "cards-article",
+          "instances": [
+            "main section.section > .container > .grid-layout.desktop-3-column:has(.article-card)"
+          ]
+        }
+      ],
+      "urlPattern": "/blog/*",
+      "sections": []
+    }
+  ]
+}

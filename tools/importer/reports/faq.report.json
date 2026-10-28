@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/faq.html",
+  "path": "faq",
+  "timestamp": "2026-10-07T11:58:38.396Z",
+  "title": "FAQ — WKND Adventures",
+  "template": "adventures",
+  "blocks": [
+    "hero-adventure",
+    "cards-article",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq",
+    "accordion-faq"
+  ]
+}

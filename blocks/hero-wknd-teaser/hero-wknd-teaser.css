@@ -1,0 +1,119 @@
+/*
+ * hero-wknd-teaser - source: wknd.site `.teaser.cmp-teaser--hero.cmp-teaser--imagebottom`
+ * (computed styles). Full-bleed photo with a white text panel (heading, paragraph, primary
+ * CTA button) pulled up over its bottom edge on wide screens; the panel grows with its
+ * content. Below the source breakpoint (1165px) the photo is cropped at 400px and the text
+ * runs underneath it with the 14px gutter.
+ */
+
+/* full-bleed section: beats the section wrapper max-width/padding (incl. the wknd-site template) */
+main > .section.hero-wknd-teaser-container > div.hero-wknd-teaser-wrapper {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.hero-wknd-teaser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: var(--wknd-text-color, #202020);
+  font-family: var(--wknd-sans, 'Source Sans Pro', 'Helvetica Neue', helvetica, arial, sans-serif);
+  font-size: 18px;
+  line-height: 27px;
+}
+
+/* photo: natural ratio, cropped at 400px from the top */
+.hero-wknd-teaser .hero-wknd-teaser-media {
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+}
+
+.hero-wknd-teaser .hero-wknd-teaser-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* the source img is inline, leaving a 7px baseline gap under the photo (visible below the
+   400px crop, e.g. at 390px); reproduced explicitly */
+.hero-wknd-teaser .hero-wknd-teaser-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 0 7px;
+  object-fit: cover;
+  object-position: 50% 100%;
+}
+
+/* text: own BFC so the heading and CTA margins stay inside (source items are floats) */
+.hero-wknd-teaser .hero-wknd-teaser-content {
+  display: flow-root;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 14px;
+}
+
+.hero-wknd-teaser .hero-wknd-teaser-content h2 {
+  margin: 18px 0 0;
+  color: var(--wknd-text-color, #202020);
+  font-family: var(--wknd-serif, asar, georgia, 'Times New Roman', times, serif);
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 54px;
+  text-align: left;
+}
+
+.hero-wknd-teaser .hero-wknd-teaser-content p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 31.5px;
+  text-align: left;
+}
+
+/* CTA: 18px above and below, the button box is the line (no strut) */
+.hero-wknd-teaser .hero-wknd-teaser-content p.hero-wknd-teaser-cta {
+  display: flex;
+  margin: 18px 0;
+  line-height: 21px;
+}
+
+.hero-wknd-teaser .hero-wknd-teaser-content p.hero-wknd-teaser-cta a.button {
+  padding: 14px 35px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+}
+
+/* breakpoint-exception: the source teaser switches to the overlapping panel at 1165px */
+@media (width >= 1165px) {
+  .hero-wknd-teaser .hero-wknd-teaser-media {
+    height: 640px;
+    max-height: 640px;
+  }
+
+  .hero-wknd-teaser .hero-wknd-teaser-media img {
+    height: 100%;
+    margin-bottom: 0;
+  }
+
+  /* 1136px panel + 28px side padding, at least 180px tall, pulled up over the photo */
+  .hero-wknd-teaser .hero-wknd-teaser-content {
+    position: relative;
+    box-sizing: content-box;
+    width: 1136px;
+    max-width: calc(100% - 56px);
+    min-height: 180px;
+    margin-top: -180px;
+    padding: 0 28px;
+    background-color: #fff;
+  }
+
+  .hero-wknd-teaser.hero-wknd-teaser-no-image .hero-wknd-teaser-content {
+    margin-top: 0;
+  }
+}

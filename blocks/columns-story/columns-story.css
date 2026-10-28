@@ -1,0 +1,71 @@
+/* columns-story: story intro -- text (h2 + paragraphs) beside a wide image */
+
+/* mobile first: one column, cells stack in authored order (text first) */
+.columns-story .columns-story-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+  color: var(--text-color);
+}
+
+.columns-story .columns-story-row + .columns-story-row {
+  margin-top: var(--space-2xl);
+}
+
+.columns-story .columns-story-body {
+  min-width: 0;
+}
+
+.columns-story .columns-story-body > :first-child {
+  margin-top: 0;
+}
+
+/* source wraps the h2 in .section-heading (margin-bottom 32px, collapsing the h2's 12px) */
+.columns-story .columns-story-body h2 {
+  margin: 0 0 var(--space-xl);
+}
+
+/* source .paragraph-lg.utility-text-secondary; keeps its 16px bottom margin, even when last */
+.columns-story .columns-story-body p {
+  margin: 0 0 var(--space-md);
+  color: var(--color-gray-500);
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
+}
+
+/* source .gallery-img--wide: full column width, 360px tall at every width, cover, 20px radius */
+.columns-story .columns-story-image {
+  overflow: hidden;
+  height: 22.5rem;
+  border-radius: var(--radius-card);
+  line-height: 0;
+}
+
+.columns-story .columns-story-image picture {
+  display: block;
+  height: 100%;
+}
+
+.columns-story .columns-story-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-card);
+  object-fit: cover;
+}
+
+/* source stacks at max-width 768px (tablet-1-column); two equal columns above */
+@media (width >= 769px) {
+  .columns-story .columns-story-row {
+    /* one equal column per authored cell, in authored order */
+    grid-template-columns: none;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+  }
+
+  .columns-story .columns-story-row.columns-story-no-image {
+    grid-template-columns: 1fr;
+    grid-auto-flow: row;
+  }
+}

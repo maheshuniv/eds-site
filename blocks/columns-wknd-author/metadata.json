@@ -1,0 +1,22 @@
+{
+  "variantName": "columns-wknd-author",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "purpose": "author-bio",
+    "imagePattern": "small-circular-left",
+    "structure": "single horizontal strip under a thin top rule: 60px round photo on the left, name heading over an uppercase roles line, row of three social icon links right-aligned on desktop; icons wrap below on tablet/mobile"
+  },
+  "contentPattern": "One row per author, 2 cells: photo | text (name as heading, roles line e.g. 'Skater, Writer', social links as plain text links labelled Facebook / Twitter / Instagram, rendered as inline SVG icon links with the network name kept as visually hidden text)",
+  "usage": {
+    "pagesUsing": [
+      "https://wknd.site/us/en/magazine/arctic-surfing.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-07"
+  },
+  "options": [],
+  "memberVariantIds": ["columns-wknd-author"]
+}

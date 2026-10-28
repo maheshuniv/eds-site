@@ -1,0 +1,153 @@
+/*
+ * Accordion (WKND) - wknd.site FAQ accordion (source: AEM core cmp-accordion, WKND theme).
+ * Flat rows: 2px light rule under each closed question, no rule under an open one.
+ * Question: uppercase Source Sans Pro 16px/600, thin plus (closed) / minus (open) at right.
+ * Answer: 14px Source Sans Pro, justified paragraphs, 7px top/left inset.
+ * Values below are the source's computed styles (1em of the 13.333px UA button font = 13.333px etc.).
+ */
+
+/* the source column has 14px gutters inside the 776px grid column */
+.accordion-wknd {
+  padding: 0 14px;
+}
+
+.accordion-wknd .accordion-wknd-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion-wknd .accordion-wknd-header {
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font-family: var(--wknd-sans);
+  font-size: inherit;
+  font-weight: 400;
+  line-height: inherit;
+}
+
+.accordion-wknd .accordion-wknd-button {
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0;
+  padding: 13.3333px;
+  border: 0;
+  border-bottom: 2px solid var(--wknd-rule-color, #ebebeb);
+  border-radius: 0;
+  background: none;
+  color: #000;
+  font-family: var(--wknd-sans);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: left;
+  text-transform: none;
+  cursor: pointer;
+  box-shadow: none;
+  transform: none;
+}
+
+.accordion-wknd .accordion-wknd-button:focus {
+  outline: none;
+}
+
+/* keyboard-only ring (the source suppresses all focus outlines; mouse users see no change) */
+.accordion-wknd .accordion-wknd-button:focus-visible {
+  outline: 2px solid var(--wknd-text-color, #202020);
+  outline-offset: -2px;
+}
+
+/* open item: the source drops the button's rule entirely */
+.accordion-wknd .accordion-wknd-button[aria-expanded='true'] {
+  border-bottom: 0;
+}
+
+.accordion-wknd .accordion-wknd-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-left: 8px;
+  font-family: var(--wknd-sans);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  text-transform: uppercase;
+}
+
+/* plus (closed) / minus (open): 21x20 box, 2px strokes spanning the full box like the icon-font glyph */
+.accordion-wknd .accordion-wknd-icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 21px;
+  height: 20px;
+}
+
+.accordion-wknd .accordion-wknd-icon::before,
+.accordion-wknd .accordion-wknd-icon::after {
+  content: '';
+  position: absolute;
+  background: currentcolor;
+}
+
+/* horizontal stroke */
+.accordion-wknd .accordion-wknd-icon::before {
+  top: 9.4px;
+  left: 0;
+  width: 21px;
+  height: 2px;
+}
+
+/* vertical stroke */
+.accordion-wknd .accordion-wknd-icon::after {
+  top: 0;
+  left: 9.5px;
+  width: 2px;
+  height: 20px;
+}
+
+.accordion-wknd .accordion-wknd-button[aria-expanded='true'] .accordion-wknd-icon::after {
+  display: none;
+}
+
+.accordion-wknd .accordion-wknd-panel {
+  padding: 7px 0 0 7px;
+  color: var(--wknd-text-color, #202020);
+  font-family: var(--wknd-sans);
+  font-size: 14px;
+  line-height: 21px;
+  text-align: left;
+  animation: accordion-wknd-fade-in 0.5s both;
+}
+
+.accordion-wknd .accordion-wknd-panel[hidden] {
+  display: none;
+}
+
+/* answer paragraphs (override the template's 18px / 2.5 body copy) */
+.accordion-wknd .accordion-wknd-panel p {
+  margin: 0 0 13.5px;
+  font-size: 14px;
+  line-height: 1.75;
+  text-align: justify;
+}
+
+.accordion-wknd .accordion-wknd-panel > :first-child {
+  margin-top: 0;
+}
+
+@keyframes accordion-wknd-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion-wknd .accordion-wknd-panel {
+    animation: none;
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "variantName": "cards-wknd-adventure",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "dense",
+    "purpose": "content-listing",
+    "imagePattern": "top-image",
+    "structure": "category filter tab bar (All + one tab per category) over a 4-per-row grid of image/title/description tiles"
+  },
+  "contentPattern": "Repeating rows, 3 columns: image | text (linked title, one-line description) | categories (comma-separated, e.g. 'Climbing, Travel'; not rendered, drives the filter tabs)",
+  "usage": {
+    "pagesUsing": ["https://wknd.site/us/en/adventures.html"],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-07"
+  },
+  "options": [],
+  "memberVariantIds": ["cards-wknd-adventure"]
+}

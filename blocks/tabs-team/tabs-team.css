@@ -1,0 +1,187 @@
+/* tabs-team: tab labels (team member names) + one profile panel visible at a time */
+
+/* tab menu: mobile scrolls horizontally, wraps from 769px */
+.tabs-team .tabs-team-list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  max-width: 100%;
+  padding-top: var(--space-sm);
+  border-top: 2px solid var(--color-black);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs-team .tabs-team-list::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs-team .tabs-team-tab {
+  flex-shrink: 0;
+  margin: 0;
+  padding: var(--space-xs) var(--space-lg) var(--space-xs) 0;
+  border: 0;
+  border-bottom: 4px solid transparent;
+  border-radius: 0;
+  background: none;
+  color: var(--color-gray-300);
+  font-family: var(--heading-font-family);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.01em;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.tabs-team .tabs-team-tab:hover {
+  color: var(--color-gray-500);
+}
+
+.tabs-team .tabs-team-tab:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.tabs-team .tabs-team-tab[aria-selected='true'] {
+  border-bottom-color: var(--color-amber);
+  color: var(--color-black);
+}
+
+/* panels: only the active one is shown */
+.tabs-team .tabs-team-panel {
+  margin-top: var(--space-xl);
+}
+
+.tabs-team .tabs-team-panel[hidden],
+.tabs-team .tabs-team-panel[aria-hidden='true'] {
+  display: none;
+}
+
+.tabs-team .tabs-team-panel:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* profile (source .team-profile-row): identity column stacked above the bio on mobile;
+   from 769px a 1rem spacer offset, a 176px identity column and a 768px bio column */
+.tabs-team .tabs-team-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+/* identity (source .team-profile-col): left-aligned photo, name and optional role */
+.tabs-team .tabs-team-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 0 0 auto;
+  max-width: 11rem;
+  text-align: left;
+}
+
+.tabs-team .tabs-team-identity > p,
+.tabs-team .tabs-team-identity > h2,
+.tabs-team .tabs-team-identity > h3,
+.tabs-team .tabs-team-identity > h4,
+.tabs-team .tabs-team-identity > h5,
+.tabs-team .tabs-team-identity > h6 {
+  margin: 0 0 var(--space-md);
+}
+
+/* round 128px photo (ring included) with a 3px amber ring */
+.tabs-team .tabs-team-photo {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 8rem;
+  height: 8rem;
+  margin: 0 0 var(--space-md);
+  overflow: hidden;
+  border: 3px solid var(--color-amber);
+  border-radius: 50%;
+  line-height: 0;
+}
+
+.tabs-team .tabs-team-photo picture {
+  display: block;
+  height: 100%;
+}
+
+.tabs-team .tabs-team-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tabs-team .tabs-team-name {
+  color: var(--color-black);
+  font-family: var(--heading-font-family);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+}
+
+.tabs-team .tabs-team-role {
+  color: var(--color-gray-500);
+  font-family: var(--body-font-family);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  line-height: var(--leading-normal);
+}
+
+/* bio (source .team-profile-bio): every paragraph keeps its 1rem bottom margin */
+.tabs-team .tabs-team-bio {
+  align-self: stretch;
+  min-width: 0;
+}
+
+.tabs-team .tabs-team-bio > :first-child {
+  margin-top: 0;
+}
+
+.tabs-team .tabs-team-bio p {
+  margin: 0 0 var(--space-md);
+  color: var(--color-gray-500);
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
+}
+
+@media (width >= 769px) {
+  .tabs-team .tabs-team-list {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+
+  .tabs-team .tabs-team-tab {
+    padding-right: var(--space-xl);
+    font-size: var(--text-xl);
+  }
+
+  /* the left padding stands in for the source's empty spacer column (0 wide + 1rem gap) */
+  .tabs-team .tabs-team-profile {
+    flex-direction: row;
+    padding-left: var(--space-md);
+  }
+
+  .tabs-team .tabs-team-identity {
+    flex: 0 0 11rem;
+    max-width: none;
+  }
+
+  .tabs-team .tabs-team-bio {
+    flex: 1 1 0;
+    align-self: auto;
+    max-width: var(--container-narrow);
+  }
+
+  .tabs-team .tabs-team-profile-single {
+    padding-left: 0;
+  }
+}

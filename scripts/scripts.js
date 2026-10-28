@@ -10,6 +10,12 @@ import {
   loadSections,
   loadCSS,
   buildBlock,
+  decorateBlock,
+  loadBlock,
+  readBlockConfig,
+  getMetadata,
+  toCamelCase,
+  toClassName,
 } from './aem.js';
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -104,6 +110,32 @@ function buildAutoBlocks(main) {
 }
 
 /**
+ * Applies section-metadata tables to their sections: `style` values become
+ * section classes, other keys become data attributes. The table is removed.
+ * @param {Element} main The container element
+ */
+function decorateSectionMetadata(main) {
+  main.querySelectorAll(':scope > .section').forEach((section) => {
+    const sectionMeta = section.querySelector('div.section-metadata');
+    if (!sectionMeta) return;
+    const meta = readBlockConfig(sectionMeta);
+    Object.keys(meta).forEach((key) => {
+      if (key === 'style') {
+        meta.style.split(',')
+          .map((style) => toClassName(style.trim()))
+          .filter((style) => style)
+          .forEach((style) => section.classList.add(style));
+      } else {
+        section.dataset[toCamelCase(key)] = meta[key];
+      }
+    });
+    const wrapper = sectionMeta.parentElement;
+    sectionMeta.remove();
+    if (wrapper !== section && !wrapper.children.length) wrapper.remove();
+  });
+}
+
+/**
  * Decorates formatted links to style them as buttons.
  * @param {HTMLElement} main The main container element
  */
@@ -151,6 +183,7 @@ export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  decorateSectionMetadata(main);
   decorateBlocks(main);
   decorateButtons(main);
 }
@@ -162,6 +195,9 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  // page templates (metadata "Template") may ship scoped styles in /templates/<name>/<name>.css
+  const template = toClassName(getMetadata('template'));
+  if (template) await loadCSS(`${window.hlx.codeBasePath}/templates/${template}/${template}.css`);
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
@@ -180,11 +216,30 @@ async function loadEager(doc) {
 }
 
 /**
+ * Loads a site-specific header/footer block (e.g. header-wknd) into the header/footer element.
+ * @param {Element} container body > header or body > footer
+ * @param {string} name block name
+ * @returns {Promise}
+ */
+function loadChromeBlock(container, name) {
+  const block = buildBlock(name, '');
+  container.append(block);
+  decorateBlock(block);
+  return loadBlock(block);
+}
+
+// wknd.site pages (template wknd-site) have their own header and footer
+// (fragments /us/en/nav and /us/en/footer)
+const isWkndSite = () => document.body.classList.contains('wknd-site');
+
+/**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
 async function loadLazy(doc) {
-  loadHeader(doc.querySelector('body > header'));
+  const header = doc.querySelector('body > header');
+  if (isWkndSite()) loadChromeBlock(header, 'header-wknd');
+  else loadHeader(header);
 
   const main = doc.querySelector('main');
   await loadSections(main);
@@ -193,7 +248,9 @@ async function loadLazy(doc) {
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  loadFooter(doc.querySelector('body > footer'));
+  const footer = doc.querySelector('body > footer');
+  if (isWkndSite()) loadChromeBlock(footer, 'footer-wknd');
+  else loadFooter(footer);
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();

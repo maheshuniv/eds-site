@@ -1,0 +1,157 @@
+/* cards-wknd-adventure: wknd.site "Current Adventures" (.cmp-tabs over .cmp-image-list).
+ * Uppercase filter tab row (active tab inverted dark) above a wrapping flex row of
+ * fixed 260px tiles: 4 per row in the 1136px container, 1 per row on phones. */
+
+.cards-wknd-adventure {
+  color: var(--wknd-text-color);
+  font-family: var(--wknd-sans);
+  font-size: 18px;
+  line-height: 27px;
+}
+
+/* tab row: wraps onto further lines on narrow screens (no scrolling, no gap) */
+.cards-wknd-adventure .cards-wknd-adventure-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 18px 0;
+  padding: 0;
+}
+
+.cards-wknd-adventure .cards-wknd-adventure-tab {
+  box-sizing: border-box;
+  min-width: 48px;
+  max-height: 48px;
+  margin: 0;
+  padding: 8px 16px;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  background: none;
+  color: var(--wknd-text-color);
+  font-family: var(--wknd-sans);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 21px;
+  text-align: left;
+  text-transform: uppercase;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.cards-wknd-adventure .cards-wknd-adventure-tab[aria-selected='true'] {
+  border: 0;
+  background-color: var(--wknd-text-color);
+  color: #fff;
+}
+
+/* source removes the focus outline; keep a ring for keyboard users only */
+.cards-wknd-adventure .cards-wknd-adventure-tab:focus {
+  outline: none;
+}
+
+.cards-wknd-adventure .cards-wknd-adventure-tab:focus-visible {
+  outline: 2px solid var(--wknd-text-color);
+  outline-offset: 2px;
+}
+
+/* grid */
+.cards-wknd-adventure .cards-wknd-adventure-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-wknd-adventure .cards-wknd-adventure-grid > li {
+  box-sizing: content-box;
+  flex: 0 1 260px;
+  min-width: 0;
+  margin: 0 0 2rem;
+  padding: 0;
+}
+
+.cards-wknd-adventure .cards-wknd-adventure-grid > li[hidden] {
+  display: none;
+}
+
+/* image: source renders a 200px inline image in a 207px link box (baseline gap) */
+.cards-wknd-adventure .cards-wknd-adventure-card-image {
+  padding-bottom: 7px;
+  line-height: 0;
+}
+
+.cards-wknd-adventure .cards-wknd-adventure-card-image a,
+.cards-wknd-adventure .cards-wknd-adventure-card-image picture {
+  display: block;
+}
+
+.cards-wknd-adventure .cards-wknd-adventure-card-image img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 200px;
+  margin: 0;
+  object-fit: cover;
+  object-position: center center;
+  overflow: hidden;
+}
+
+.cards-wknd-adventure .cards-wknd-adventure-card-body {
+  min-width: 0;
+}
+
+/* title: uppercase dark link, no underline and no hover change */
+.cards-wknd-adventure .cards-wknd-adventure-card-title {
+  margin: 0;
+  color: var(--wknd-text-color);
+  font-family: var(--wknd-sans);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+main .cards-wknd-adventure .cards-wknd-adventure-card-title > a:any-link:not(.button),
+main .cards-wknd-adventure .cards-wknd-adventure-card-title > a:any-link:not(.button):hover {
+  display: inline;
+  color: var(--wknd-text-color);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: normal;
+  text-decoration: none;
+  text-transform: inherit;
+  opacity: 1;
+  transition: none;
+}
+
+/* description: single truncated uppercase line */
+.cards-wknd-adventure .cards-wknd-adventure-card-description {
+  width: 260px;
+  max-width: 100%;
+  margin: 1rem 0 0;
+  color: var(--wknd-muted-color);
+  font-size: 14px;
+  line-height: 21px;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (width >= 768px) {
+  .cards-wknd-adventure .cards-wknd-adventure-grid {
+    justify-content: normal;
+  }
+
+  .cards-wknd-adventure .cards-wknd-adventure-grid > li {
+    padding-right: 14px;
+  }
+}

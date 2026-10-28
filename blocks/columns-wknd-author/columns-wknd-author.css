@@ -1,0 +1,215 @@
+/*
+ * columns-wknd-author: wknd.site article author byline.
+ * Values measured from the source .experiencefragment byline (separator + byline + btn-list).
+ * Source: 2px #ebebeb rule (hr, 1px top + 1px bottom border) with 64px below it; the 64px above it
+ * comes from the template wrapper margin.
+ * Byline: 60px round photo (7px above / 14px below), 25px gap, Asar 24/36 name (8px padding-top,
+ * 4px below), Source Sans Pro 12/30 uppercase grey roles (13.5px below) -> 91.5px tall.
+ * Social: three 48px dark squares, no gaps, left-aligned.
+ * Up to 1024px the icons sit below the byline; above 1024px they take the source 3/12 grid column
+ * (starts 14px after the byline text, which keeps a 14px right gutter).
+ */
+
+.columns-wknd-author {
+  box-sizing: border-box;
+  border-top: var(--columns-wknd-author-rule-width, 2px) solid var(--columns-wknd-author-rule-color, var(--wknd-rule-color, #ebebeb));
+  padding-top: var(--columns-wknd-author-rule-gap, 64px);
+  color: var(--wknd-text-color, #202020);
+  font-family: var(--wknd-sans);
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.columns-wknd-author .columns-wknd-author-row {
+  display: grid;
+  grid-template-areas:
+    'photo info'
+    'social social';
+  grid-template-columns: var(--columns-wknd-author-photo-size, 60px) minmax(0, 1fr);
+  align-items: start;
+  gap: 0;
+}
+
+/* a further author repeats the source separator: 64px, rule, 64px */
+.columns-wknd-author .columns-wknd-author-row + .columns-wknd-author-row {
+  margin-top: var(--columns-wknd-author-rule-gap, 64px);
+  border-top: var(--columns-wknd-author-rule-width, 2px) solid var(--columns-wknd-author-rule-color, var(--wknd-rule-color, #ebebeb));
+  padding-top: var(--columns-wknd-author-rule-gap, 64px);
+}
+
+.columns-wknd-author .columns-wknd-author-no-photo {
+  grid-template-areas:
+    'info'
+    'social';
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* photo: 60px circle, 7px above / 14px below (source inline image in a 27px line box) */
+.columns-wknd-author .columns-wknd-author-photo {
+  grid-area: photo;
+  width: var(--columns-wknd-author-photo-size, 60px);
+  height: var(--columns-wknd-author-photo-size, 60px);
+  margin: 7px 0 14px;
+  line-height: 0;
+}
+
+.columns-wknd-author .columns-wknd-author-photo picture {
+  display: block;
+}
+
+.columns-wknd-author .columns-wknd-author-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* name + roles stacked, 25px right of the photo */
+.columns-wknd-author .columns-wknd-author-info {
+  grid-area: info;
+  min-width: 0;
+  padding-left: 25px;
+}
+
+.columns-wknd-author .columns-wknd-author-no-photo .columns-wknd-author-info {
+  padding-left: 0;
+}
+
+.columns-wknd-author .columns-wknd-author-info > * {
+  margin: 0;
+}
+
+/* name: Asar 24px / 36px, 8px above, 4px below */
+.columns-wknd-author .columns-wknd-author-info .columns-wknd-author-name {
+  margin: 0 0 4px;
+  padding: 8px 0 0;
+  color: var(--wknd-text-color, #202020);
+  font-family: var(--wknd-serif);
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 36px;
+  text-align: left;
+}
+
+/* roles: Source Sans Pro 12px / 30px, uppercase grey, 13.5px below */
+.columns-wknd-author .columns-wknd-author-info .columns-wknd-author-roles {
+  margin: 0 0 13.5px;
+  color: var(--wknd-muted-color, #696969);
+  font-family: var(--wknd-sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 30px;
+  text-align: justify;
+  text-transform: uppercase;
+}
+
+/* social icon bar: 48px dark squares, no gaps, left-aligned */
+.columns-wknd-author .columns-wknd-author-social {
+  grid-area: social;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.columns-wknd-author .columns-wknd-author-social li {
+  margin: 0;
+  padding: 0;
+}
+
+.columns-wknd-author .columns-wknd-author-social-link,
+.columns-wknd-author .columns-wknd-author-social-link:hover {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  width: var(--columns-wknd-author-icon-box, 48px);
+  height: var(--columns-wknd-author-icon-box, 48px);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--wknd-text-color, #202020);
+  color: var(--wknd-rule-color, #ebebeb);
+  text-decoration: none;
+  transition: none;
+}
+
+/*
+ * Icon placement: the source icon-font glyph is 17.5px tall, 18px from the top and 14px from
+ * the left of the button. The inline SVG paths sit in a 24x24 viewBox, so each icon is scaled
+ * and offset to put its path's bounding box on that glyph box (same paths and offsets as
+ * cards-wknd-contributor).
+ */
+.columns-wknd-author .columns-wknd-author-icon {
+  position: absolute;
+  display: block;
+  top: 14px;
+  left: 14px;
+  width: var(--columns-wknd-author-icon-size, 20px);
+  height: var(--columns-wknd-author-icon-size, 20px);
+}
+
+/* facebook path bbox: x 8, y 4.3, h 16.7 -> scale 1.0479 */
+.columns-wknd-author .columns-wknd-author-social-facebook .columns-wknd-author-icon {
+  top: 13px;
+  left: 5.6px;
+  width: 25.15px;
+  height: 25.15px;
+}
+
+/* twitter path bbox: x 2, y 3.9, h 16.3 -> scale 1.0736 */
+.columns-wknd-author .columns-wknd-author-social-twitter .columns-wknd-author-icon {
+  top: 13.3px;
+  left: 11.85px;
+  width: 25.77px;
+  height: 25.77px;
+}
+
+/* instagram path bbox: x 2.4, y 2.5, h 19.2 -> scale 0.9115 */
+.columns-wknd-author .columns-wknd-author-social-instagram .columns-wknd-author-icon {
+  top: 15.2px;
+  left: 11.8px;
+  width: 21.875px;
+  height: 21.875px;
+}
+
+/* visually hidden network name (kept for screen readers) */
+.columns-wknd-author .columns-wknd-author-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* breakpoint-exception: the source grid puts the icons beside the byline above 1024px
+   (byline 9/12, icons 3/12 of the 776px article column incl. its 14px gutters) */
+@media (width >= 1025px) {
+  .columns-wknd-author .columns-wknd-author-row {
+    grid-template-areas: 'photo info social';
+    grid-template-columns: var(--columns-wknd-author-photo-size, 60px) minmax(0, 1fr) calc(25% - 7px);
+  }
+
+  .columns-wknd-author .columns-wknd-author-no-photo {
+    grid-template-areas: 'info social';
+    grid-template-columns: minmax(0, 1fr) calc(25% - 7px);
+  }
+
+  /* the byline column keeps its 14px right gutter before the icon column */
+  .columns-wknd-author .columns-wknd-author-info {
+    padding-right: 14px;
+  }
+
+  .columns-wknd-author .columns-wknd-author-social {
+    flex-wrap: nowrap;
+  }
+}

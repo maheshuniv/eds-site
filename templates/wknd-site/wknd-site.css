@@ -1,0 +1,582 @@
+/*
+ * WKND Site template (pages migrated from wknd.site, metadata "Template: wknd-site").
+ * Everything is scoped to `body.wknd-site main` so the shared header and footer,
+ * and all other pages, keep the site design.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Asar&family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+body.wknd-site main {
+  --wknd-brand-primary: #ffea00;
+  --wknd-text-color: #202020;
+  --wknd-muted-color: #696969;
+  --wknd-rule-color: #ebebeb;
+  --wknd-serif: asar, georgia, 'Times New Roman', times, serif;
+  --wknd-sans: 'Source Sans Pro', 'Helvetica Neue', helvetica, arial, sans-serif;
+  --wknd-container-max: 1164px;
+  --wknd-gutter: 14px;
+
+  /* re-point the shared tokens so default content and buttons pick up the wknd.site look */
+  --heading-font-family: var(--wknd-serif);
+  --body-font-family: var(--wknd-sans);
+  --text-color: var(--wknd-text-color);
+  --link-color: #0045ff;
+  --link-hover-color: #0045ff;
+
+  color: var(--wknd-text-color);
+  font-family: var(--wknd-sans);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* layout: flat AEM-grid rhythm, no section padding, 1164px container with 14px gutters */
+body.wknd-site main > .section {
+  padding: 0;
+}
+
+/* source grid items are floats, so their margins never collapse: give each wrapper its own BFC */
+body.wknd-site main > .section > div {
+  display: flow-root;
+  max-width: var(--wknd-container-max);
+  padding: 0 var(--wknd-gutter);
+}
+
+/* full-bleed hero teaser and image carousel (span the viewport, like the source) */
+body.wknd-site main > .section.hero-wknd-container > div,
+body.wknd-site main > .section.carousel-wknd-container > div {
+  max-width: none;
+  padding: 0;
+}
+
+body.wknd-site main > .section > .default-content-wrapper + div,
+body.wknd-site main > .section > div + .default-content-wrapper {
+  margin-top: 0;
+}
+
+body.wknd-site main > .section > .default-content-wrapper > :last-child {
+  margin-bottom: 13.5px;
+}
+
+/* a closing button component adds no space below it on the source */
+body.wknd-site main > .section > .default-content-wrapper > p.button-wrapper:last-child {
+  margin-bottom: 0;
+}
+
+/* default content */
+body.wknd-site main h1,
+body.wknd-site main h2,
+body.wknd-site main h3 {
+  margin: 27px 0 13.5px;
+  color: var(--wknd-text-color);
+  font-family: var(--wknd-serif);
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.5;
+}
+
+body.wknd-site main h1 {
+  font-size: 40px;
+}
+
+body.wknd-site main h2 {
+  font-size: 36px;
+}
+
+body.wknd-site main h3 {
+  font-size: 24px;
+}
+
+/* section titles carry a short yellow underline ("wknd-underline-title" sections underline the h1 too) */
+body.wknd-site main .default-content-wrapper h2::after,
+body.wknd-site main > .section.wknd-underline-title .default-content-wrapper h1::after {
+  content: '';
+  display: block;
+  width: 84px;
+  padding-top: 8px;
+  border-bottom: 2px solid var(--wknd-brand-primary);
+}
+
+body.wknd-site main p {
+  margin: 0 0 13.5px;
+  font-size: 18px;
+  line-height: 2.5;
+  text-align: justify;
+}
+
+/* "wknd-text-small" sections: small intro copy (source cmp-text--font-small) */
+body.wknd-site main > .section.wknd-text-small .default-content-wrapper p {
+  font-size: 14px;
+}
+
+body.wknd-site main p a:any-link:not(.button) {
+  display: inline;
+  color: var(--link-color);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: normal;
+  text-decoration: none;
+}
+
+/* buttons: flat yellow, uppercase */
+body.wknd-site main a.button:any-link {
+  border: 0;
+  border-radius: 0;
+  padding: 1em 2.5em;
+  font-family: var(--wknd-sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 1.5;
+  text-transform: uppercase;
+  box-shadow: none;
+  transition: none;
+}
+
+body.wknd-site main a.button:hover,
+body.wknd-site main a.button:active {
+  transform: none;
+  box-shadow: none;
+}
+
+body.wknd-site main a.button.primary,
+body.wknd-site main a.button.primary:hover,
+body.wknd-site main a.button.primary:focus-visible {
+  background-color: var(--wknd-brand-primary);
+  color: var(--wknd-text-color);
+}
+
+/* "wknd-divider" section: opens with the thin grey separator rule */
+body.wknd-site main > .section.wknd-divider::before {
+  content: '';
+  display: block;
+  box-sizing: border-box;
+  max-width: calc(var(--wknd-container-max) - 2 * var(--wknd-gutter));
+  margin: 36px auto;
+  border-top: 1px solid var(--wknd-rule-color);
+  border-bottom: 1px solid var(--wknd-rule-color);
+}
+
+/* "wknd-divider-large": closing separator rule with the source's default (large) spacing.
+   The section is otherwise empty, so it gets its own BFC to keep the rule's margins inside it. */
+body.wknd-site main > .section.wknd-divider-large {
+  display: flow-root;
+}
+
+body.wknd-site main > .section.wknd-divider-large::before {
+  content: '';
+  display: block;
+  box-sizing: border-box;
+  max-width: calc(var(--wknd-container-max) - 2 * var(--wknd-gutter));
+  margin: 64px auto;
+  border-top: 1px solid var(--wknd-rule-color);
+  border-bottom: 1px solid var(--wknd-rule-color);
+}
+
+/* "wknd-sidebar" sections: main column + right sidebar (source 8/12 + 1/12 gap + 3/12 grid).
+   Everything authored after the section's last block becomes the sidebar.
+   Below 1025px the columns stack: the photo keeps 8/12 of the width, blocks and sidebar run edge to edge. */
+
+/* the photo's own margins must not collapse into the heading margin (source components are floats) */
+body.wknd-site main > .section.wknd-sidebar .default-content-wrapper p:has(> picture) {
+  display: flow-root;
+  margin: 0;
+  line-height: 0;
+}
+
+body.wknd-site main > .section.wknd-sidebar .default-content-wrapper picture img {
+  display: block;
+  width: calc((100% + 2 * var(--wknd-gutter)) * 8 / 12 - 2 * var(--wknd-gutter));
+  margin: 7px 0 14px;
+}
+
+/* sidebar copy: small heading and small left-aligned text */
+body.wknd-site main > .section.wknd-sidebar > div:last-child h3 {
+  font-size: 24px;
+}
+
+body.wknd-site main > .section.wknd-sidebar > div:last-child p {
+  font-size: 14px;
+  text-align: left;
+}
+
+@media (width >= 768px) {
+  body.wknd-site main > .section.wknd-sidebar > .default-content-wrapper:first-child > p:not(:has(> picture)) {
+    width: calc((100% + 2 * var(--wknd-gutter)) * 8 / 12 - 2 * var(--wknd-gutter));
+  }
+}
+
+body.wknd-site main > .section.wknd-sidebar > div:not(.default-content-wrapper) {
+  padding: 0;
+}
+
+body.wknd-site main > .section.wknd-sidebar > div:last-child {
+  padding: 18px 0 0;
+}
+
+/* breakpoint-exception: the source grid switches to two columns above 1024px */
+@media (width >= 1025px) {
+  body.wknd-site main > .section.wknd-sidebar {
+    display: grid;
+    grid-template-columns: 8fr 1fr 3fr;
+    grid-auto-rows: min-content;
+    align-items: start;
+    max-width: var(--wknd-container-max);
+    margin: 0 auto;
+  }
+
+  body.wknd-site main > .section.wknd-sidebar > div {
+    grid-column: 1;
+    width: auto;
+    max-width: none;
+    margin: 0;
+  }
+
+  body.wknd-site main > .section.wknd-sidebar > div:not(.default-content-wrapper) {
+    padding: 0;
+  }
+
+  body.wknd-site main > .section.wknd-sidebar > div:last-child {
+    grid-column: 3;
+    grid-row: 1 / span 20;
+    padding: 18px 0 0;
+  }
+
+  body.wknd-site main > .section.wknd-sidebar .default-content-wrapper picture img,
+  body.wknd-site main > .section.wknd-sidebar > .default-content-wrapper:first-child > p:not(:has(> picture)) {
+    width: 100%;
+  }
+}
+
+/* "wknd-adventure-details" sections: details list (3/12) left, tabs (9/12) right from 1025px; stacked below.
+   breakpoint-exception: the source grid switches to two columns above 1024px */
+@media (width >= 1025px) {
+  body.wknd-site main > .section.wknd-adventure-details {
+    display: grid;
+    grid-template-columns: 3fr 9fr;
+    align-items: start;
+    max-width: var(--wknd-container-max);
+    margin: 0 auto;
+  }
+
+  body.wknd-site main > .section.wknd-adventure-details > div {
+    width: auto;
+    max-width: none;
+    margin: 0;
+  }
+
+  body.wknd-site main > .section.wknd-adventure-details > div + div {
+    padding-top: 18px;
+  }
+}
+
+/* "wknd-inset" adventure pages (metadata theme: wknd-inset, older source markup): the source's fixed-width
+   content container is not a grid column, so it keeps its own 14px gutter on top of the components' gutters.
+   The title and the tabs sit 28px in, the details list 14px in; the container (and the breadcrumb) center a
+   1164px content box rather than a 1164px border box. (The source's third-party "Share this Adventure"
+   widget is not migrated, so stacked layouts are shorter than the source by that widget's height.) */
+body.wknd-site.wknd-inset main > .section.breadcrumb-wknd-container > div,
+body.wknd-site.wknd-inset main > .section.wknd-underline-title > div,
+body.wknd-site.wknd-inset main > .section.wknd-adventure-details > div {
+  max-width: calc(var(--wknd-container-max) + 2 * var(--wknd-gutter));
+}
+
+body.wknd-site.wknd-inset main > .section.wknd-underline-title > div,
+body.wknd-site.wknd-inset main > .section.wknd-adventure-details > .tabs-wknd-wrapper {
+  padding-inline: calc(2 * var(--wknd-gutter));
+}
+
+/* breakpoint-exception: the source grid switches to two columns above 1024px */
+@media (width >= 1025px) {
+  body.wknd-site.wknd-inset main > .section.wknd-adventure-details {
+    padding-inline: var(--wknd-gutter);
+  }
+
+  body.wknd-site.wknd-inset main > .section.wknd-adventure-details > .columns-wknd-details-wrapper {
+    padding-inline: 0;
+  }
+
+  body.wknd-site.wknd-inset main > .section.wknd-adventure-details > .tabs-wknd-wrapper {
+    padding-inline: var(--wknd-gutter);
+  }
+}
+
+/* "wknd-article" sections (magazine articles): article column + right sidebar (source 8/12 + 1/12 gap + 3/12 grid).
+   The article text has no gutter (it runs edge to edge of its column); headings, photos and the author
+   byline keep the 14px gutter. Everything authored after the section's last block becomes the sidebar.
+   Below 1025px the columns stack and the article runs edge to edge of the viewport. */
+
+/* the copy and the pull quotes span the article column without a gutter */
+body.wknd-site main > .section.wknd-article > .default-content-wrapper,
+body.wknd-site main > .section.wknd-article > .quote-wknd-wrapper {
+  padding: 0;
+}
+
+/* byline: small semibold uppercase sans (source h4 title) */
+body.wknd-site main > .section.wknd-article > .default-content-wrapper h4 {
+  margin: 1.33em 0;
+  color: var(--wknd-text-color);
+  font-family: var(--wknd-sans);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+
+/* section titles are separate source components (floats): their top margin never collapses, so use padding */
+body.wknd-site main > .section.wknd-article > .default-content-wrapper h2 {
+  margin: 0 0 13.5px;
+  padding: 27px var(--wknd-gutter) 0;
+}
+
+/* photos: 14px gutter, 7px top / 14px bottom spacing, own BFC so the margins stay inside */
+body.wknd-site main > .section.wknd-article > .default-content-wrapper p:has(> picture) {
+  display: flow-root;
+  margin: 0;
+  padding: 0 var(--wknd-gutter);
+  line-height: 0;
+}
+
+body.wknd-site main > .section.wknd-article > .default-content-wrapper p:has(> picture) img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 7px 0 14px;
+}
+
+/* inline pull quote in the copy (source text component: 14px gutter + 40px blockquote indent, 18px spacing) */
+body.wknd-site main > .section.wknd-article > .default-content-wrapper blockquote {
+  margin: 0 calc(var(--wknd-gutter) + 40px);
+  padding: 18px 0;
+}
+
+body.wknd-site main > .section.wknd-article > .default-content-wrapper blockquote p {
+  margin: 0;
+  line-height: 27px;
+  text-align: left;
+}
+
+/* the section before the article (hero photo + breadcrumb): 7px photo margins, source breadcrumb box height */
+body.wknd-site main > .section:has(+ .section.wknd-article) > .default-content-wrapper > p:has(> picture) {
+  margin: 7px 0 14px;
+  line-height: 0;
+}
+
+body.wknd-site main > .section:has(+ .section.wknd-article) > .default-content-wrapper > p:has(> picture) img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+body.wknd-site main > .section:has(+ .section.wknd-article) > .breadcrumb-wknd-wrapper {
+  padding-top: 5px;
+}
+
+/* image caption: an emphasised-only paragraph directly after a photo (source .cmp-image__title).
+   Bold-italic paragraphs (addresses) after a photo are body copy in the source. */
+body.wknd-site main > .section.wknd-article > .default-content-wrapper p:has(> picture) + p:has(> em:only-child):not(:has(strong)) {
+  margin: -3.5px 0 0;
+  padding: 0 var(--wknd-gutter);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+body.wknd-site main > .section.wknd-article > .default-content-wrapper p:has(> picture) + p:has(> em:only-child):not(:has(strong)) em {
+  font-style: normal;
+}
+
+/* blocks inside the article column */
+body.wknd-site main > .section.wknd-article > .quote-wknd-wrapper {
+  margin: 18px 0;
+}
+
+/* author byline: 14px gutter, opens 64px below the copy (source separator) */
+body.wknd-site main > .section.wknd-article > .columns-wknd-author-wrapper {
+  margin-top: 64px;
+}
+
+/* sidebar (everything after the last block): 14px gutter; the top offset is the source "share this story" title */
+body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) ~ .default-content-wrapper:last-child {
+  padding: 103.5px var(--wknd-gutter) 0;
+}
+
+body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) ~ .default-content-wrapper:last-child p {
+  text-align: left;
+}
+
+/* download teaser: title link, description, file properties, dark download button */
+body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) ~ .default-content-wrapper:last-child h3 {
+  margin: 7px 0 0;
+  font-family: var(--wknd-sans);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-transform: uppercase;
+}
+
+body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) ~ .default-content-wrapper:last-child h3 a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) ~ .default-content-wrapper:last-child h3 + p:not(:has(br, a)) {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 40px;
+  text-transform: uppercase;
+}
+
+/* file name, size and format: one wrapping run of 12px grey items (the line breaks are dropped, see li br below) */
+body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) ~ .default-content-wrapper:last-child p:has(> br):not(:has(a)) {
+  margin: 4.5px 0 18px;
+  color: var(--wknd-muted-color);
+  font-size: 12px;
+  line-height: 12px;
+  text-transform: uppercase;
+}
+
+body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) ~ .default-content-wrapper:last-child p:has(a.button) {
+  margin: 0;
+  line-height: 0;
+}
+
+body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) ~ .default-content-wrapper:last-child a.button:any-link {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8.8px;
+  width: fit-content;
+  height: 48px;
+  padding: 16px 35px 0 31.5px;
+  background-color: var(--wknd-text-color);
+  color: #fff;
+  font-weight: 400;
+  line-height: 14px;
+}
+
+/* download glyph (source wknd-icon-font): arrow into a tray, inside a square */
+body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) ~ .default-content-wrapper:last-child a.button:any-link::before {
+  content: '';
+  flex: none;
+  width: 18px;
+  height: 17.6px;
+  margin-top: -1.76px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none' stroke='%23000' stroke-width='1.8'%3E%3Crect x='1.3' y='1.3' width='15.4' height='15.4'/%3E%3Cpath d='M9 4v8M5.6 8.6 9 12l3.4-3.4M5 14.2h8'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* "up next" list: grey left-ruled cards, uppercase title and small grey date (the last card keeps its margin) */
+body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) ~ .default-content-wrapper:last-child ul {
+  display: flow-root;
+  margin: 50px 0 18px;
+  padding: 0;
+  list-style: none;
+}
+
+body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) ~ .default-content-wrapper:last-child li {
+  box-sizing: content-box;
+  height: 120px;
+  margin: 0 0 18px;
+  border-left: 5px solid var(--wknd-rule-color);
+  padding: 8px 16px 8px 21px;
+  color: var(--wknd-muted-color);
+  font-size: 12px;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+
+body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) ~ .default-content-wrapper:last-child li a:any-link {
+  display: block;
+  margin: 0 -10px 5px -5px;
+  padding: 5px;
+  color: var(--wknd-text-color);
+  font-size: 18px;
+  line-height: 27px;
+  text-decoration: none;
+}
+
+body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) ~ .default-content-wrapper:last-child li br,
+body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) ~ .default-content-wrapper:last-child p:has(> br):not(:has(a)) br {
+  display: none;
+}
+
+/* breakpoint-exception: the source breadcrumb list switches from 12px to 14px at 768px */
+@media (width >= 768px) {
+  body.wknd-site main > .section:has(+ .section.wknd-article) > .breadcrumb-wknd-wrapper {
+    padding-top: 7px;
+  }
+}
+
+/* breakpoint-exception: the source grid switches to two columns above 1024px */
+@media (width >= 1025px) {
+  body.wknd-site main > .section:has(+ .section.wknd-article) > .breadcrumb-wknd-wrapper {
+    padding-top: 21px;
+  }
+
+  body.wknd-site main > .section.wknd-article {
+    display: grid;
+    grid-template-columns: 8fr 1fr 3fr;
+    grid-auto-rows: min-content;
+    align-items: start;
+    max-width: var(--wknd-container-max);
+    margin: 0 auto;
+  }
+
+  body.wknd-site main > .section.wknd-article > .default-content-wrapper,
+  body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) {
+    grid-column: 1;
+    width: auto;
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  body.wknd-site main > .section.wknd-article > div:not(.default-content-wrapper) ~ .default-content-wrapper:last-child {
+    grid-column: 3;
+    grid-row: 1 / span 20;
+  }
+}
+
+/* wknd.site header (block header-wknd, a fixed bar): body > header reserves its space, so the page content
+   starts where the source content starts (source .root padding-top: 130px, 200px from 1025px) */
+body.wknd-site header {
+  height: 130px;
+}
+
+body.wknd-site header .header-wknd {
+  visibility: hidden;
+}
+
+body.wknd-site header .header-wknd[data-block-status="loaded"] {
+  visibility: visible;
+}
+
+/* the open mobile drawer pushes the page 275px right (source navPanel-visible); relative offsets keep the
+   fixed header bar on the viewport. The "pushed" class stays on while the page slides back. */
+body.wknd-site {
+  left: 0;
+}
+
+body.wknd-site.header-wknd-nav-pushed {
+  position: relative;
+  overflow-x: hidden;
+  transition: left 0.5s ease;
+}
+
+body.wknd-site.header-wknd-nav-pushed.header-wknd-nav-open {
+  left: 275px;
+}
+
+/* breakpoint-exception: the source desktop header starts at 1025px */
+@media (width >= 1025px) {
+  body.wknd-site header {
+    height: 200px;
+  }
+
+  body.wknd-site.header-wknd-nav-pushed.header-wknd-nav-open {
+    left: 0;
+  }
+}

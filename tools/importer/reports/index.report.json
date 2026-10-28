@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/",
+  "path": "index",
+  "timestamp": "2026-10-07T11:58:03.641Z",
+  "title": "WKND Adventures — Bold Stories. Real Life. Wild Places.",
+  "template": "adventures",
+  "blocks": [
+    "hero-adventure",
+    "columns-feature",
+    "tabs-activity",
+    "cards-index",
+    "accordion-faq",
+    "ticker",
+    "gallery-adventure"
+  ]
+}

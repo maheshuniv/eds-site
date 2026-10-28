@@ -1,0 +1,26 @@
+{
+  "variantName": "cards-magazine",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "article-listing",
+    "imagePattern": "top-image",
+    "structure": "linked image + uppercase linked title + truncated description",
+    "notes": "4-per-row wrapping grid (260px tiles), title 18px/600 uppercase, description 14px uppercase #696969 single-line ellipsis, no CTA"
+  },
+  "contentPattern": "Wrapping 4-per-row grid of 5 article tiles: linked image, uppercase linked title, single-line truncated description",
+  "usage": {
+    "pagesUsing": [
+      "https://wknd.site/us/en.html",
+      "https://wknd.site/us/en/magazine.html"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-07T10:49:37Z"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "cards-magazine"
+  ]
+}

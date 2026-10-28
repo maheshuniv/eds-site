@@ -1,0 +1,26 @@
+{
+  "variantName": "columns-magazine",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "featured-article",
+    "imagePattern": "large-left",
+    "structure": "image + eyebrow + h2 + paragraph + yellow cta",
+    "notes": "Full-container split, image ~62% left, #ebebeb content panel right, Asar serif 36px title, #ffea00 uppercase CTA; stacks on mobile"
+  },
+  "contentPattern": "Split layout: photo left, grey panel right with eyebrow, h2, paragraph, yellow CTA",
+  "usage": {
+    "pagesUsing": [
+      "https://wknd.site/us/en.html",
+      "https://wknd.site/us/en/magazine.html"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-07T10:49:37Z"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "columns-magazine"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "variantName": "quote-wknd",
+  "baseBlock": "quote",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light-grey-panel",
+    "density": "medium",
+    "purpose": "pull-quote",
+    "imagePattern": "noimg",
+    "structure": "full-width panel holding a large quotation, a short horizontal rule under it, and an optional attribution line"
+  },
+  "contentPattern": "Block Collection quote: row 1 quotation, row 2 attribution (optional). Italic text in the attribution becomes <cite>.",
+  "usage": {
+    "pagesUsing": [
+      "https://wknd.site/us/en/magazine/arctic-surfing.html",
+      "https://wknd.site/us/en/magazine/guide-la-skateparks.html",
+      "https://wknd.site/us/en/magazine/ski-touring.html",
+      "https://wknd.site/us/en/magazine/western-australia.html"
+    ],
+    "reuseCount": 4,
+    "lastUsed": "2026-10-07"
+  },
+  "options": [],
+  "memberVariantIds": ["quote-wknd"]
+}

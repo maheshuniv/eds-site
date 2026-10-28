@@ -1,0 +1,190 @@
+/* tab menu: mobile scrolls horizontally, wraps from 769px (source breakpoint) */
+.tabs-activity .tabs-activity-list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  max-width: 100%;
+  padding-top: var(--space-sm);
+  border-top: 2px solid var(--color-black);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs-activity .tabs-activity-list::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs-activity .tabs-activity-tab {
+  flex-shrink: 0;
+  margin: 0;
+  padding: var(--space-xs) var(--space-lg) var(--space-xs) 0;
+  border: 0;
+  border-bottom: 4px solid transparent;
+  border-radius: 0;
+  background: none;
+  color: var(--color-gray-300);
+  font-family: var(--heading-font-family);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.01em;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.tabs-activity .tabs-activity-tab:hover {
+  color: var(--color-gray-500);
+}
+
+.tabs-activity .tabs-activity-tab[aria-selected='true'] {
+  border-bottom-color: var(--color-amber);
+  color: var(--color-black);
+}
+
+/* panels */
+.tabs-activity .tabs-activity-panel {
+  margin-top: var(--space-2xl);
+}
+
+.tabs-activity .tabs-activity-panel[aria-hidden='true'] {
+  display: none;
+}
+
+/* card grid: 1 column on mobile, 3 columns from 769px */
+.tabs-activity .tabs-activity-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* article card */
+.tabs-activity .tabs-activity-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-card);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.tabs-activity .tabs-activity-card-linked {
+  cursor: pointer;
+}
+
+.tabs-activity .tabs-activity-card-linked:hover {
+  border-color: var(--color-gray-300);
+  background-color: var(--color-cream);
+  box-shadow: 0 4px 20px 0 rgb(0 0 0 / 8%);
+}
+
+/* keyboard focus ring on the whole card instead of the inline heading link */
+.tabs-activity .tabs-activity-card-linked:has(.tabs-activity-card-link:focus-visible) {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.tabs-activity .tabs-activity-card-image {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.tabs-activity .tabs-activity-card-image picture {
+  display: block;
+  height: 100%;
+}
+
+.tabs-activity .tabs-activity-card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tabs-activity .tabs-activity-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-sm);
+  min-width: 0;
+  padding: var(--space-lg) var(--space-md);
+}
+
+.tabs-activity .tabs-activity-card-body > * {
+  margin-block: 0;
+}
+
+.tabs-activity .tabs-activity-card-body > p {
+  color: var(--color-gray-500);
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+}
+
+/* amber pill tag (source wraps it in a meta row with an 8px top margin) */
+.tabs-activity .tabs-activity-card-body > .tabs-activity-card-tag {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  margin-top: var(--space-xs);
+  padding: calc(var(--space-xxs) + 1px) var(--space-xs) calc(var(--space-xxs) - 1px);
+  border-radius: var(--radius-full);
+  background-color: var(--color-amber);
+  color: var(--color-white);
+  font-family: var(--heading-font-family);
+  font-size: 0.65rem;
+  font-weight: 600;
+  line-height: var(--leading-normal);
+  letter-spacing: 0.05em;
+}
+
+.tabs-activity .tabs-activity-card-body > h3 {
+  margin-bottom: var(--space-sm);
+  color: var(--color-black);
+  font-size: var(--text-sm);
+  line-height: var(--leading-tight);
+  letter-spacing: 0.05em;
+}
+
+.tabs-activity .tabs-activity-card-link:any-link,
+.tabs-activity .tabs-activity-card-link:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tabs-activity .tabs-activity-card-link:focus-visible {
+  outline: none;
+}
+
+/* stretch the heading link over the whole card so the card is clickable */
+.tabs-activity .tabs-activity-card-linked .tabs-activity-card-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+@media (width >= 769px) {
+  .tabs-activity .tabs-activity-list {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+
+  .tabs-activity .tabs-activity-tab {
+    padding-right: var(--space-xl);
+    font-size: var(--text-xl);
+  }
+
+  .tabs-activity .tabs-activity-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

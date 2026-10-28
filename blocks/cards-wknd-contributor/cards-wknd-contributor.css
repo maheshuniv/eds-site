@@ -1,0 +1,174 @@
+/*
+ * cards-wknd-contributor: wknd.site contributor profile cards (about-us).
+ * Values measured from the source .cmp-experience-fragment--contributor cards.
+ * Source slot: 291px wide at 1440 (25% of the 1164px grid), padding 9px 14px 18px
+ * plus a 14px inner container gutter; card height 344.5px.
+ */
+
+/* the grid spans the full 1164px container: pull out over the section's 14px gutter */
+.cards-wknd-contributor > ul {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin: 0 calc(-1 * var(--wknd-gutter, 14px));
+  padding: 0;
+  list-style: none;
+}
+
+.cards-wknd-contributor .cards-wknd-contributor-card {
+  box-sizing: border-box;
+  min-width: 0;
+  margin: 0;
+
+  /* 9px 14px 18px slot padding + 14px inner container gutter */
+  padding: 9px 28px 18px;
+  color: var(--wknd-text-color, #202020);
+  font-family: var(--wknd-sans);
+  font-size: 18px;
+  line-height: 27px;
+  text-align: center;
+}
+
+/* photo: 164px circle, 7px above / 14px below (source inline image in a 27px line box -> 185px row) */
+.cards-wknd-contributor .cards-wknd-contributor-card-image {
+  width: 100%;
+  line-height: 0;
+}
+
+.cards-wknd-contributor .cards-wknd-contributor-card-image picture {
+  display: block;
+}
+
+.cards-wknd-contributor .cards-wknd-contributor-card-image img {
+  display: block;
+  width: 164px;
+  max-width: 100%;
+  height: 164px;
+  margin: 7px auto 14px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.cards-wknd-contributor .cards-wknd-contributor-card-body {
+  width: 100%;
+}
+
+/* name: Asar 24px / 36px */
+.cards-wknd-contributor .cards-wknd-contributor-name {
+  margin: 0 0 6px;
+  color: var(--wknd-text-color, #202020);
+  font-family: var(--wknd-serif);
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 36px;
+  text-align: center;
+}
+
+/* roles: Source Sans Pro 14px / 21px, semibold uppercase */
+.cards-wknd-contributor .cards-wknd-contributor-roles {
+  margin: 0 0 3.5px;
+  color: var(--wknd-text-color, #202020);
+  font-family: var(--wknd-sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 21px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* social icon bar: 48px dark squares, no gaps, centered, 18px above */
+.cards-wknd-contributor .cards-wknd-contributor-social {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin: 0;
+  padding: 18px 14px 0;
+  list-style: none;
+}
+
+.cards-wknd-contributor .cards-wknd-contributor-social li {
+  margin: 0;
+  padding: 0;
+}
+
+.cards-wknd-contributor .cards-wknd-contributor-social-link,
+.cards-wknd-contributor .cards-wknd-contributor-social-link:hover {
+  position: relative;
+  display: block;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  background-color: var(--wknd-text-color, #202020);
+  color: var(--wknd-rule-color, #ebebeb);
+  text-decoration: none;
+  transition: none;
+}
+
+/*
+ * Icon placement: the source icon-font glyph is 17.5px tall, starting 14px from the left
+ * and ~17.5px from the top of the button (fb 8.75px, twitter ~21.9px, instagram 17.5px wide).
+ * The inline SVG paths sit in a 24x24 viewBox, so each icon is scaled and offset to put
+ * its path's bounding box on that glyph box.
+ */
+.cards-wknd-contributor .cards-wknd-contributor-icon {
+  position: absolute;
+  display: block;
+}
+
+/* facebook path bbox: x 8, y 4.3, h 16.7 -> scale 1.0479 */
+.cards-wknd-contributor .cards-wknd-contributor-social-facebook .cards-wknd-contributor-icon {
+  top: 13px;
+  left: 5.6px;
+  width: 25.15px;
+  height: 25.15px;
+}
+
+/* twitter path bbox: x 2, y 3.9, h 16.3 -> scale 1.0736 */
+.cards-wknd-contributor .cards-wknd-contributor-social-twitter .cards-wknd-contributor-icon {
+  top: 13.3px;
+  left: 11.85px;
+  width: 25.77px;
+  height: 25.77px;
+}
+
+/* instagram path bbox: x 2.4, y 2.5, h 19.2 -> scale 0.9115 */
+.cards-wknd-contributor .cards-wknd-contributor-social-instagram .cards-wknd-contributor-icon {
+  top: 15.2px;
+  left: 11.8px;
+  width: 21.875px;
+  height: 21.875px;
+}
+
+/* accessible label, visually hidden */
+.cards-wknd-contributor .cards-wknd-contributor-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* source tablet grid (768-1024px): two 50% slots per row */
+@media (width >= 768px) {
+  .cards-wknd-contributor > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* source desktop grid: four fixed 25% slots, so a short last row stays left-aligned */
+@media (width >= 1025px) {
+  .cards-wknd-contributor > ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .cards-wknd-contributor .cards-wknd-contributor-social {
+    padding: 18px 0 0;
+  }
+}

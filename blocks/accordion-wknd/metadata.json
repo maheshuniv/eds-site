@@ -1,0 +1,20 @@
+{
+  "variantName": "accordion-wknd",
+  "baseBlock": "accordion",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "faq",
+    "imagePattern": "noimg",
+    "structure": "flat full-width rows with 2px light rule under each; uppercase question with plus (closed) / minus (open) icon at right; multiple open; URL hash tracks opened item"
+  },
+  "contentPattern": "2 columns: row 1 = block name; each following row = question cell | answer cell (Block Collection accordion convention)",
+  "usage": {
+    "pagesUsing": ["https://wknd.site/us/en/faqs.html"],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-07"
+  },
+  "options": [],
+  "memberVariantIds": ["accordion-wknd"]
+}

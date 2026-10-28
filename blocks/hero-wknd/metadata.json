@@ -1,0 +1,20 @@
+{
+  "variantName": "hero-wknd",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "purpose": "page-hero",
+    "imagePattern": "full-bleed",
+    "structure": "full-width photo with a text panel (heading + sentence) overlapping its lower-left edge"
+  },
+  "contentPattern": "1 column: row 1 = background image; row 2 = heading (h2) + one paragraph, no CTA",
+  "usage": {
+    "pagesUsing": ["https://wknd.site/us/en/adventures.html"],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-07"
+  },
+  "options": [],
+  "memberVariantIds": ["hero-wknd"]
+}

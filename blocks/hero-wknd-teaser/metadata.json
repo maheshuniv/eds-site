@@ -1,0 +1,20 @@
+{
+  "variantName": "hero-wknd-teaser",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "purpose": "promo-teaser",
+    "imagePattern": "full-bleed",
+    "structure": "full-width 640px photo with a white panel (h2, paragraph, primary cta button) overlapping its bottom edge; panel height grows with content"
+  },
+  "contentPattern": "Image plus text: row 1 image, row 2 heading (h2), paragraph and a bold CTA link (renders as the primary button). A single row with image | text cells is also accepted.",
+  "usage": {
+    "pagesUsing": ["https://wknd.site/us/en.html"],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-07"
+  },
+  "options": [],
+  "memberVariantIds": ["hero-wknd-teaser"]
+}

@@ -1,0 +1,78 @@
+/* WKND Adventures brand tokens (extracted from wknd-adventures.com) */
+:root {
+  /* palette */
+  --color-white: #fff;
+  --color-black: #0f1a14;
+  --color-amber: #e8651a;
+  --color-cream: #f5f0e8;
+  --color-gray-100: #f0ece4;
+  --color-gray-200: #ddd8cf;
+  --color-gray-300: #c8c2b8;
+  --color-gray-500: #7a8a80;
+  --color-gray-700: #3d4f45;
+
+  /* semantic colors */
+  --background-color: var(--color-white);
+  --text-color: var(--color-black);
+  --link-color: var(--color-black);
+  --link-hover-color: var(--color-amber);
+  --light-color: var(--color-gray-100);
+  --dark-color: var(--color-black);
+  --accent-color: var(--color-amber);
+
+  /* fonts */
+  --heading-font-family: syncopate, syncopate-fallback, sans-serif;
+  --body-font-family: 'Instrument Sans', instrument-sans-fallback, sans-serif;
+
+  /* type scale (mobile) */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.375rem;
+  --text-4xl: 1.75rem;
+  --text-5xl: 2rem;
+  --leading-tight: 1.1;
+  --leading-snug: 1.3;
+  --leading-normal: 1.6;
+
+  /* spacing */
+  --space-xxs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 5rem;
+  --section-padding: var(--space-xl);
+  --container-max: 1200px;
+  --container-narrow: 48rem;
+  --container-padding: 1rem;
+
+  /* shape and motion */
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-card: 1.25rem;
+  --radius-full: 9999px;
+  --transition-fast: 0.15s ease;
+  --focus-ring-color: var(--color-black);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+
+  /* nav height */
+  --nav-height: 75px;
+}
+
+@media (width >= 769px) {
+  :root {
+    --text-3xl: 2rem;
+    --text-4xl: 2.5rem;
+    --text-5xl: 3.5rem;
+    --section-padding: var(--space-3xl);
+    --container-padding: 1.5rem;
+  }
+}

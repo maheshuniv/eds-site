@@ -1,0 +1,34 @@
+{
+  "variantName": "gallery-adventure",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "purpose": "image-gallery",
+    "imagePattern": "image-only",
+    "structure": "3 images + wide image"
+  },
+  "contentPattern": "row 1 = block name; row 2 = 3 cells, one image each (3-up grid); optional row 3 = 1 cell with one image rendered full width. A row's cell count sets its column count; all images stack to one column on mobile.",
+  "usage": {
+    "pagesUsing": [
+      "https://wknd-adventures.com/",
+      "https://wknd-adventures.com/blog/alpine-cycling.html",
+      "https://wknd-adventures.com/blog/desert-survival-guide.html",
+      "https://wknd-adventures.com/blog/kayaking-norway.html",
+      "https://wknd-adventures.com/blog/mountain-photography.html",
+      "https://wknd-adventures.com/blog/patagonia-trek.html",
+      "https://wknd-adventures.com/blog/surfing-costa-rica.html",
+      "https://wknd-adventures.com/blog/ultralight-backpacking.html",
+      "https://wknd-adventures.com/blog/wild-swimming-guide.html",
+      "https://wknd-adventures.com/blog/winter-mountaineering.html",
+      "https://wknd-adventures.com/blog/yosemite-rock-climbing.html"
+    ],
+    "reuseCount": 11,
+    "lastUsed": "2026-10-07"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "gallery-adventure"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "url": "https://wknd.site/us/en/about-us.html",
+  "path": "us/en/about-us",
+  "timestamp": "2026-10-07T11:16:44.117Z",
+  "title": "About Us",
+  "template": "wknd-site-about",
+  "blocks": [
+    "cards-wknd-contributor",
+    "cards-wknd-contributor",
+    "cards-wknd-contributor",
+    "cards-wknd-contributor",
+    "cards-wknd-contributor",
+    "cards-wknd-contributor",
+    "cards-wknd-contributor"
+  ]
+}

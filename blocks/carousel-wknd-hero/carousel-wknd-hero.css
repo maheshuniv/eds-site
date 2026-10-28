@@ -1,0 +1,236 @@
+/*
+ * Carousel (WKND hero) - source: wknd.site `.carousel.cmp-carousel--hero` (computed styles)
+ * Each slide is a hero teaser: cover photo (natural ratio cropped at 400px; 640px from 1165px)
+ * with the text below it (centred, shrink-to-fit), turning into a 1136px white panel pulled
+ * up 180px over the bottom of the photo from 1165px.
+ * Controls under the slide: prev/next arrows at the right, dots centred in the space left of
+ * them (left-aligned under 768px). Then 72px (4em) of space below the carousel.
+ * No autoplay; the outgoing slide hides at once and the incoming one fades in over 0.5s.
+ */
+
+/* full-bleed section: beats the section wrapper max-width/padding (incl. the wknd-site template) */
+main > .section.carousel-wknd-hero-container > div.carousel-wknd-hero-wrapper {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.carousel-wknd-hero {
+  position: relative;
+  width: 100%;
+  margin-bottom: 72px;
+  color: var(--wknd-text-color, #202020);
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.carousel-wknd-hero .carousel-wknd-hero-slides,
+.carousel-wknd-hero .carousel-wknd-hero-indicators {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* only the active slide takes up space (the carousel is as tall as the slide shown) */
+.carousel-wknd-hero .carousel-wknd-hero-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* source: `fadeIn` animation 0.5s (ease) on the incoming item; not run on first render */
+.carousel-wknd-hero .carousel-wknd-hero-slide.is-active {
+  height: auto;
+  overflow: visible;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-wknd-hero .carousel-wknd-hero-slide.is-active {
+    transition: none;
+  }
+}
+
+/* photo: natural ratio, cropped at 400px (25pc) */
+.carousel-wknd-hero .carousel-wknd-hero-slide-image {
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+}
+
+.carousel-wknd-hero .carousel-wknd-hero-slide-image picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* the source img is inline, leaving a 7px baseline gap under the photo when it is not cropped
+   (e.g. at 390px); reproduced explicitly */
+.carousel-wknd-hero .carousel-wknd-hero-slide-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 0 7px;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* text: centred under the photo, shrink-to-fit, 14px side padding */
+.carousel-wknd-hero .carousel-wknd-hero-slide-content {
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 0 14px;
+}
+
+.carousel-wknd-hero .carousel-wknd-hero-slide-content h2 {
+  margin: 18px 0 0;
+  font-size: 36px;
+  line-height: 54px;
+}
+
+.carousel-wknd-hero .carousel-wknd-hero-slide-content p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 31.5px;
+  text-align: left;
+}
+
+.carousel-wknd-hero .carousel-wknd-hero-slide-content p.carousel-wknd-hero-cta {
+  display: flex;
+  margin: 18px 0;
+  line-height: 27px;
+}
+
+.carousel-wknd-hero .carousel-wknd-hero-slide-content .carousel-wknd-hero-eyebrow {
+  margin-top: 18px;
+}
+
+/* controls: arrows start at the slide bottom, dots 9px (0.5em) below it */
+.carousel-wknd-hero .carousel-wknd-hero-controls {
+  display: flex;
+  align-items: flex-start;
+  height: 0;
+}
+
+/* under 768px the dots sit at the left, 14px in and 14px further down */
+.carousel-wknd-hero .carousel-wknd-hero-indicators {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 9px;
+  padding: 14px 0 0 14px;
+}
+
+.carousel-wknd-hero .carousel-wknd-hero-indicator {
+  flex: 0 1 auto;
+  margin: 0 7px;
+}
+
+.carousel-wknd-hero .carousel-wknd-hero-indicator button {
+  display: block;
+  width: 10px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgb(175 175 175);
+  cursor: pointer;
+}
+
+.carousel-wknd-hero .carousel-wknd-hero-indicator button[aria-current='true'] {
+  background-color: rgb(0 0 0 / 80%);
+}
+
+.carousel-wknd-hero .carousel-wknd-hero-nav {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 3.6px;
+}
+
+.carousel-wknd-hero .carousel-wknd-hero-nav button {
+  display: block;
+  box-sizing: border-box;
+  width: 26px;
+  height: 24px;
+  margin: 0 13.333px 0 0;
+  padding: 1px 0 1px 6px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: rgb(0 0 0);
+  cursor: pointer;
+  appearance: none;
+}
+
+/* icon-only arrows (source: wknd-icon-font e90f / e90e, 20px glyphs) */
+.carousel-wknd-hero .carousel-wknd-hero-nav button::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: currentcolor;
+  mask: var(--carousel-wknd-hero-arrow) center / 20px 20px no-repeat;
+}
+
+.carousel-wknd-hero .carousel-wknd-hero-prev {
+  --carousel-wknd-hero-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M200 100H14M107 6 13 100l94 94' fill='none' stroke='%23000' stroke-width='18'/%3E%3C/svg%3E");
+}
+
+.carousel-wknd-hero .carousel-wknd-hero-next {
+  --carousel-wknd-hero-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M0 100H186M93 6l94 94-94 94' fill='none' stroke='%23000' stroke-width='18'/%3E%3C/svg%3E");
+}
+
+/* source has no hover change; keyboard focus keeps the browser-style ring */
+.carousel-wknd-hero .carousel-wknd-hero-nav button:focus-visible,
+.carousel-wknd-hero .carousel-wknd-hero-indicator button:focus-visible {
+  outline: 1px auto rgb(16 16 16);
+  outline-offset: 0;
+}
+
+/* breakpoint-exception: the source moves the dots to the centre from 768px */
+@media (width >= 768px) {
+  /* the dot row (9px + 10px) is in flow; the 27px arrows hang 8px into the bottom space */
+  .carousel-wknd-hero .carousel-wknd-hero-controls {
+    height: 19px;
+  }
+
+  .carousel-wknd-hero .carousel-wknd-hero-indicators {
+    justify-content: center;
+    padding: 0;
+  }
+}
+
+/* breakpoint-exception: the source hero teaser switches to the overlapping panel at 1165px */
+@media (width >= 1165px) {
+  .carousel-wknd-hero .carousel-wknd-hero-slide-image {
+    height: 640px;
+    max-height: 640px;
+  }
+
+  .carousel-wknd-hero .carousel-wknd-hero-slide-image img {
+    height: 100%;
+    margin-bottom: 0;
+  }
+
+  /* 1136px white panel + 28px side padding, at least 180px tall, pulled up over the photo */
+  .carousel-wknd-hero .carousel-wknd-hero-slide-content {
+    position: relative;
+    box-sizing: content-box;
+    width: min(1136px, 100% - 56px);
+    max-width: none;
+    min-height: 180px;
+    margin-top: -180px;
+    padding: 0 28px;
+    background-color: #fff;
+  }
+}
